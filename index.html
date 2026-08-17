@@ -5,6 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Campus to Corporate Ready — Workshop Hub</title>
 <meta name="description" content="The complete 2-day workshop package: 10 session decks, facilitator guide, participant handouts, and modern-workplace supplements. Everything a trainer needs to run Campus to Corporate Ready.">
+<link rel="canonical" href="https://hedaprateek.github.io/campus-to-corporate/">
+
+<!-- Link preview (WhatsApp, LinkedIn, Slack, iMessage) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Campus to Corporate Ready">
+<meta property="og:url" content="https://hedaprateek.github.io/campus-to-corporate/">
+<meta property="og:title" content="Campus to Corporate Ready — Workshop Hub">
+<meta property="og:description" content="A complete 2-day workshop that prepares final-year students for their first job. Ten animated session decks, facilitator guide, participant handouts — free to view or download.">
+<meta property="og:image" content="https://hedaprateek.github.io/campus-to-corporate/assets/og-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Campus to Corporate Ready — a 2-day workshop package for final-year students.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Campus to Corporate Ready — Workshop Hub">
+<meta name="twitter:description" content="A complete 2-day workshop that prepares final-year students for their first job. Ten animated session decks, facilitator guide, participant handouts.">
+<meta name="twitter:image" content="https://hedaprateek.github.io/campus-to-corporate/assets/og-preview.png">
+<meta name="theme-color" content="#0A1628">
+
+<!-- Gradient "C" mark, inline so it costs no extra request -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230EA5C8'/%3E%3Cstop offset='1' stop-color='%23E0A81E'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Ctext x='16' y='23' font-family='Verdana,sans-serif' font-size='19' font-weight='bold' fill='%230A1628' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -52,7 +73,28 @@
   .nav-links a:hover{color:var(--teal-bright)}
   .nav-cta{font-size:13px;font-weight:600;color:var(--navy);background:var(--teal);padding:9px 16px;border-radius:8px;transition:transform .15s,background .2s}
   .nav-cta:hover{background:var(--teal-bright);transform:translateY(-1px)}
-  @media(max-width:720px){.nav-links{display:none}}
+  .nav-toggle{display:none;background:transparent;border:1px solid var(--line);border-radius:8px;
+    width:38px;height:38px;place-items:center;cursor:pointer;color:#E8EEF6;flex-shrink:0}
+  .nav-toggle svg{width:19px;height:19px}
+  .nav-toggle .x{display:none}
+  .nav-toggle[aria-expanded="true"] .x{display:block}
+  .nav-toggle[aria-expanded="true"] .bars{display:none}
+  .nav-right{display:flex;align-items:center;gap:12px}
+  /* Below 860px the four links collapse into a disclosure panel rather than
+     vanishing — phone users still need to reach the sections. */
+  @media(max-width:860px){
+    .nav-toggle{display:grid}
+    .nav-links{position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;
+      background:rgba(10,22,40,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+      padding:8px 24px 16px;display:none}
+    .nav-links.open{display:flex}
+    .nav-links a{padding:13px 0;border-bottom:1px solid var(--line);font-size:15px}
+    .nav-links a:last-child{border-bottom:none}
+  }
+  @media(max-width:420px){
+    nav .brand .bn{display:none}
+    .nav-cta{padding:9px 13px}
+  }
 
   /* ── Hero ── */
   .hero{position:relative;padding:96px 0 72px;overflow:hidden}
@@ -143,10 +185,10 @@
   .rcard .kind{font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
   .rcard h3{font-size:20px;font-weight:600;margin-bottom:10px;line-height:1.2}
   .rcard p{font-size:14.5px;color:var(--muted);margin-bottom:20px;line-height:1.55}
-  .rcard .foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto}
-  .rcard .size{font-size:12.5px;color:var(--muted)}
-  .dl-btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--navy);
-    background:var(--teal);padding:10px 17px;border-radius:9px;transition:background .2s,transform .15s}
+  .rcard .foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;flex-wrap:wrap}
+  .rcard .size{font-size:12.5px;color:var(--muted);white-space:nowrap;flex-shrink:0}
+  .dl-btn{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:var(--navy);
+    background:var(--teal);padding:10px 15px;border-radius:9px;transition:background .2s,transform .15s;white-space:nowrap}
   .dl-btn:hover{background:var(--teal-bright);transform:translateY(-1px)}
   .dl-btn svg{width:15px;height:15px}
   .rcard .acts{display:flex;align-items:center;gap:9px}
@@ -165,6 +207,10 @@
     border-radius:20px;padding:44px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
   .allbox h3{font-size:24px;font-weight:700;margin-bottom:8px}
   .allbox p{color:var(--muted);font-size:15px;max-width:440px}
+  .all-actions{display:flex;flex-direction:column;align-items:center;gap:12px;flex-shrink:0}
+  .repo-link{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;color:var(--muted);transition:color .2s}
+  .repo-link:hover{color:var(--teal-bright)}
+  @media(max-width:640px){.allbox{padding:32px 24px}.all-actions{width:100%}.all-actions .btn{width:100%;justify-content:center}}
 
   /* ── Footer ── */
   footer{background:var(--navy);border-top:1px solid var(--line);padding:48px 0 40px}
@@ -180,21 +226,53 @@
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.3,1),transform .6s cubic-bezier(.2,.7,.3,1)}
   .reveal.in{opacity:1;transform:none}
   @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.pulse{animation:none}}
+
+  /* Keyboard focus — visible on both the dark and the light bands */
+  a:focus-visible,button:focus-visible{outline:2px solid var(--teal-bright);outline-offset:3px;border-radius:6px}
+  .light a:focus-visible{outline-color:#0883a3}
+
+  /* Shown only if the content fetch fails or JS is off */
+  .fallback{max-width:640px;margin:0 auto;padding:80px 24px;text-align:center;color:var(--muted)}
+  .fallback h2{color:#fff;margin-bottom:12px;font-size:24px}
+  .fallback a{color:var(--teal-bright);text-decoration:underline}
+  .updated{color:var(--muted)}
 </style>
 </head>
 <body>
 <div class="rail"><div class="rail-fill" id="railFill"></div></div>
 
+<noscript>
+  <div class="fallback">
+    <h2>This page needs JavaScript</h2>
+    <p>The workshop materials are listed dynamically. You can still download everything directly as a
+      <a href="https://github.com/hedaprateek/campus-to-corporate/archive/refs/heads/main.zip">ZIP archive</a>,
+      or browse the files on <a href="https://github.com/hedaprateek/campus-to-corporate">GitHub</a>.</p>
+  </div>
+</noscript>
+
+<div class="fallback" id="fallback" hidden>
+  <h2>Couldn't load the materials list</h2>
+  <p>Something went wrong fetching the content. You can still download everything as a
+    <a href="https://github.com/hedaprateek/campus-to-corporate/archive/refs/heads/main.zip">ZIP archive</a>,
+    or browse the files on <a href="https://github.com/hedaprateek/campus-to-corporate">GitHub</a>.</p>
+</div>
+
 <nav>
   <div class="wrap nav-inner">
-    <a href="#top" class="brand"><span class="dot">C</span>Campus&nbsp;to&nbsp;Corporate</a>
-    <div class="nav-links">
+    <a href="#top" class="brand"><span class="dot">C</span><span class="bn">Campus&nbsp;to&nbsp;Corporate</span></a>
+    <div class="nav-links" id="navLinks">
       <a href="#journey">The 2 Days</a>
-      <a href="#decks">Session Decks</a>
       <a href="#resources">Trainer Kit</a>
       <a href="#start">How to Use</a>
+      <a href="#all">Download</a>
     </div>
-    <a href="#all" class="nav-cta">Get Everything</a>
+    <div class="nav-right">
+      <a href="#all" class="nav-cta">Get Everything</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menu">
+        <svg class="bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
   </div>
 </nav>
 
@@ -202,68 +280,37 @@
   <div class="hero-glow"></div>
   <div class="hero-glow-2"></div>
   <div class="wrap">
-    <div class="eyebrow reveal"><span class="pulse"></span>2-Day Workshop · Complete Package</div>
+    <div class="eyebrow reveal"><span class="pulse"></span><span id="heroEyebrow">2-Day Workshop · Complete Package</span></div>
     <h1 class="reveal">
       From the <span class="campus">campus</span><br>
       <span class="move"><span class="arrow">→</span></span> to the <span class="corp">corporate floor</span>.
     </h1>
-    <p class="lede reveal">Everything you need to run <strong>Campus to Corporate Ready</strong> — ten animated session decks, a full facilitator guide, participant handouts, and a modern-workplace supplement. Built for final-year students stepping into their first job.</p>
+    <p class="lede reveal" id="heroLede"></p>
     <div class="hero-actions reveal">
       <a href="#journey" class="btn btn-primary">Walk the 2 days
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a href="#all" class="btn btn-ghost">Download all materials</a>
     </div>
-    <div class="hero-stats reveal">
-      <div class="stat"><div class="num">10</div><div class="lbl">Session decks</div></div>
-      <div class="stat"><div class="num">2</div><div class="lbl">Full days, 9–6</div></div>
-      <div class="stat"><div class="num">4</div><div class="lbl">Trainer documents</div></div>
-      <div class="stat"><div class="num"><span>100+</span></div><div class="lbl">Slides, all animated</div></div>
-    </div>
+    <div class="hero-stats reveal" id="heroStats"></div>
   </div>
 </header>
 
 <!-- ── THE JOURNEY / TIMELINE ── -->
 <section class="band light" id="journey">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">The 2 days</div>
-      <h2>Ten sessions, one continuous arc.</h2>
-      <p>Each session builds on the last — from understanding the workplace to walking out interview-ready. Download any deck directly from its stop on the path.</p>
+    <div class="sec-head reveal" data-sec="journey">
+      <div class="sec-tag"></div><h2></h2><p></p>
     </div>
-
-    <!-- DAY 1 -->
-    <div class="day-block reveal">
-      <div class="day-label"><span class="d">Day 1</span><span class="t">Foundations · 9:00 AM – 6:00 PM</span></div>
-      <div class="timeline" id="tl-d1"></div>
-    </div>
-
-    <!-- DAY 2 -->
-    <div class="day-block reveal">
-      <div class="day-label"><span class="d">Day 2</span><span class="t">Readiness · 9:00 AM – 6:00 PM</span></div>
-      <div class="timeline" id="tl-d2"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ── SESSION DECKS quick download note ── -->
-<section class="band" id="decks" style="padding-top:64px;padding-bottom:20px">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">Session decks</div>
-      <h2>Modern, animated, ready to present.</h2>
-      <p>Every deck opens with objectives and closes with a quote, with real-world scenarios, data, and activities in between. Fade-in animations are built in — just present. Several now include 2025 modern-workplace content: AI at work, remote collaboration, and scannable QR moments.</p>
-    </div>
+    <div id="dayBlocks"></div>
   </div>
 </section>
 
 <!-- ── TRAINER KIT ── -->
-<section class="band" id="resources" style="padding-top:40px">
+<section class="band" id="resources">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">The trainer kit</div>
-      <h2>Everything around the slides.</h2>
-      <p>The documents that turn a set of decks into a workshop anyone can deliver.</p>
+    <div class="sec-head reveal" data-sec="resources">
+      <div class="sec-tag"></div><h2></h2><p></p>
     </div>
     <div class="grid" id="resGrid"></div>
   </div>
@@ -272,16 +319,10 @@
 <!-- ── HOW TO USE ── -->
 <section class="band light" id="start">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">How to use this</div>
-      <h2>From download to delivery in four steps.</h2>
+    <div class="sec-head reveal" data-sec="start">
+      <div class="sec-tag"></div><h2></h2><p></p>
     </div>
-    <div class="steps reveal">
-      <div class="step"><div class="n">01</div><h4>Read the guide first</h4><p>The Facilitator Guide has minute-by-minute timing, opening scripts, and talking points for all ten sessions. Start there.</p></div>
-      <div class="step"><div class="n">02</div><h4>Print the handouts</h4><p>One Participant Handout Pack per person — ten fill-in worksheets that match each session. Print double-sided.</p></div>
-      <div class="step"><div class="n">03</div><h4>Load the decks</h4><p>Open each session deck in PowerPoint. Animations advance on click. Swap the placeholder QR links for your own before delivery.</p></div>
-      <div class="step"><div class="n">04</div><h4>Run the program</h4><p>Use the Program Toolkit for the pre-workshop diagnostic, the 30-day follow-up, and the before/after impact scorecard.</p></div>
-    </div>
+    <div class="steps reveal" id="stepGrid"></div>
   </div>
 </section>
 
@@ -290,13 +331,19 @@
   <div class="wrap">
     <div class="allbox reveal">
       <div>
-        <h3>Take the whole package.</h3>
-        <p>All ten session decks, the facilitator guide, handouts, program toolkit, industry playbook, and modern-workplace supplement — in one place. Download files individually above, or grab them all from the repository. Every deck and document also has a <strong>View</strong> button that opens it straight in your browser — handy for a quick look, though animations only play properly in PowerPoint.</p>
+        <h3 id="allH">Take the whole package.</h3>
+        <p id="allP"></p>
       </div>
-      <a href="https://github.com/hedaprateek/campus-to-corporate" class="btn btn-primary" id="repoBtn" target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.68.92.68 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
-        Open the repository
-      </a>
+      <div class="all-actions">
+        <a href="#" class="btn btn-primary" id="zipBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+          Download everything (ZIP)
+        </a>
+        <a href="#" class="repo-link" id="repoBtn" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.68.92.68 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+          or browse the repository
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -305,15 +352,12 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <a href="#top" class="brand"><span class="dot">C</span>Campus to Corporate</a>
-        <p>A complete, ready-to-deliver 2-day workshop that prepares final-year students for their first job — the shift from campus habits to corporate expectations.</p>
+        <a href="#top" class="brand"><span class="dot">C</span><span class="bn">Campus to Corporate</span></a>
+        <p id="footBlurb"></p>
       </div>
       <div class="foot-col">
         <h5>Materials</h5>
-        <a href="#journey">Session decks</a>
-        <a href="#resources">Facilitator guide</a>
-        <a href="#resources">Participant handouts</a>
-        <a href="#resources">Modern supplement</a>
+        <div id="footMaterials"></div>
       </div>
       <div class="foot-col">
         <h5>The program</h5>
@@ -325,102 +369,205 @@
     </div>
     <div class="foot-bottom">
       <span>Campus to Corporate Ready · Workshop Package</span>
-      <span>Built for trainers and the students they prepare.</span>
+      <span class="updated" id="footUpdated"></span>
+      <span id="footTagline"></span>
     </div>
   </div>
 </footer>
 
 <script>
-  // ── Session data ──
-  const DAY1 = [
-    {n:1, t:"Understanding the Corporate World", time:"9:00–10:30", slides:12, anim:true, mod:true, file:"materials/decks/S1_Corporate_World.pptx"},
-    {n:2, t:"Professional Etiquettes & Behaviour", time:"10:45–12:15", slides:11, anim:true, mod:true, file:"materials/decks/S2_Etiquettes.pptx"},
-    {n:3, t:"Communication Skills", time:"1:15–2:45", slides:10, anim:true, mod:false, file:"materials/decks/S3_Communication.pptx"},
-    {n:4, t:"Teamwork & Workplace Collaboration", time:"3:00–4:30", slides:11, anim:true, mod:true, file:"materials/decks/S4_Teamwork.pptx"},
-    {n:5, t:"Day 1 Recap & Reflection", time:"5:00–6:00", slides:9, anim:true, mod:false, file:"materials/decks/S5_Day1_Recap.pptx"},
-  ];
-  const DAY2 = [
-    {n:6, t:"Personal Branding & Career Readiness", time:"9:00–10:30", slides:11, anim:true, mod:true, file:"materials/decks/S6_Personal_Branding.pptx"},
-    {n:7, t:"Interview Skills & All Rounds", time:"10:45–12:30", slides:11, anim:true, mod:true, file:"materials/decks/S7_Interview_Skills.pptx"},
-    {n:8, t:"Workplace Ethics, Attitude & Growth Mindset", time:"1:30–3:00", slides:12, anim:true, mod:true, file:"materials/decks/S8_Ethics_Mindset.pptx"},
-    {n:9, t:"Mock Interview & Peer Feedback", time:"3:15–4:45", slides:8, anim:true, mod:false, file:"materials/decks/S9_Mock_Interview.pptx"},
-    {n:10, t:"Closing, Certificates & Motivation", time:"5:00–6:00", slides:10, anim:true, mod:true, file:"materials/decks/S10_Closing.pptx"},
-  ];
-  const RESOURCES = [
-    {kind:"Trainer Manual", cls:"g", icon:"📕", title:"Facilitator Guide", desc:"28 pages. Minute-by-minute timing, opening scripts, slide talking points, activity facilitation, and 2025 delivery notes for every session.", size:"32 KB · DOCX", file:"materials/guides/Facilitator_Guide.docx"},
-    {kind:"Participant Workbook", cls:"h", icon:"📝", title:"Participant Handout Pack", desc:"Ten printable, fill-in worksheets — one per session. Company map, PREP practice, STAR builder, mindset audit, commitment card, and more.", size:"16 KB · DOCX", file:"materials/handouts/Participant_Handout_Pack.docx"},
-    {kind:"Program Operations", cls:"g", icon:"🧰", title:"Program Toolkit", desc:"The pre-workshop diagnostic, the 30-day follow-up sequence, and the before/after impact scorecard — the pieces that make the learning stick.", size:"20 KB · DOCX", file:"materials/guides/Program_Toolkit.docx"},
-    {kind:"Deep-Dive Reference", cls:"g", icon:"🏭", title:"Industry Readiness Playbook", desc:"The campus-vs-industry gap, real-world simulations, tool fluency, and industry-specific tracks — for going beyond the two days.", size:"24 KB · DOCX", file:"materials/guides/Industry_Readiness_Playbook.docx"},
-    {kind:"Drop-in Slides", cls:"s", icon:"⚡", title:"Modern Workplace 2025 Supplement", desc:"Ten standalone slides on AI at work, remote collaboration, the modern fresher toolkit, and three interactive QR moments. Slot into any session.", size:"224 KB · PPTX", file:"materials/supplements/Modern_Workplace_2025_Supplement.pptx"},
-  ];
+/* ─────────────────────────────────────────────────────────────
+   All page content lives in content.json. Nothing here is
+   hardcoded — edit that file (or use admin.html) and the page
+   follows. Sections, sessions, days and resources can be added,
+   removed or reordered without touching this file.
+   ───────────────────────────────────────────────────────────── */
 
-  const dlSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>';
-  const eyeSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.6"/></svg>';
+const dlSvg  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>';
+const eyeSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.6"/></svg>';
 
-  // Office Web Viewer renders pptx/docx in-browser. It fetches the file itself,
-  // so it needs the absolute public URL — resolve against the current page so
-  // this keeps working if the site ever moves to a different path.
-  const viewURL = f =>
-    "https://view.officeapps.live.com/op/view.aspx?src=" +
-    encodeURIComponent(new URL(f, location.href).href);
+// Escape anything that lands in an attribute or text slot. Descriptions and
+// ledes are deliberately exempt (marked "rich" below) so authors can use <strong>.
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
+  ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
 
-  function stopHTML(s){
-    const badges = [];
-    badges.push(`<span>${s.slides} slides</span>`);
-    if(s.anim) badges.push(`<span class="anim">✦ animated</span>`);
-    if(s.mod) badges.push(`<span class="anim">◆ 2025 content</span>`);
-    return `<div class="stop">
-      <div class="stop-card">
-        <div class="stop-num">S${s.n}</div>
-        <div class="stop-body">
-          <h4>${s.t}</h4>
-          <div class="meta">${badges.join("")}<span>${s.time}</span></div>
-        </div>
-        <div class="stop-acts">
-          <a class="stop-dl stop-view" href="${viewURL(s.file)}" target="_blank" rel="noopener" title="Preview in browser — no download">${eyeSvg}View</a>
-          <a class="stop-dl" href="${s.file}" download>${dlSvg}Deck</a>
-        </div>
+// Office Web Viewer fetches the file from its own servers, so it needs the
+// absolute public URL — resolved against the current page so this survives
+// the site moving to a different path.
+const viewURL = f =>
+  "https://view.officeapps.live.com/op/view.aspx?src=" +
+  encodeURIComponent(new URL(f, location.href).href);
+
+const fmtBytes = b =>
+  b < 1024 ? b + " B" :
+  b < 1024 * 1024 ? Math.round(b / 1024) + " KB" :
+  (b / 1048576).toFixed(1) + " MB";
+
+const extOf = f => (f.split(".").pop() || "").toUpperCase();
+
+function stopHTML(s) {
+  const badges = [`<span>${esc(s.slides)} slides</span>`];
+  if (s.anim) badges.push('<span class="anim">✦ animated</span>');
+  if (s.mod)  badges.push('<span class="anim">◆ 2025 content</span>');
+  return `<div class="stop">
+    <div class="stop-card">
+      <div class="stop-num">S${esc(s.n)}</div>
+      <div class="stop-body">
+        <h4>${esc(s.t)}</h4>
+        <div class="meta">${badges.join("")}<span>${esc(s.time)}</span></div>
       </div>
-    </div>`;
-  }
-  document.getElementById("tl-d1").innerHTML = DAY1.map(stopHTML).join("");
-  document.getElementById("tl-d2").innerHTML = DAY2.map(stopHTML).join("");
-
-  document.getElementById("resGrid").innerHTML = RESOURCES.map(r=>`
-    <div class="rcard">
-      <div class="icon ${r.cls}">${r.icon}</div>
-      <div class="kind">${r.kind}</div>
-      <h3>${r.title}</h3>
-      <p>${r.desc}</p>
-      <div class="foot">
-        <span class="size">${r.size}</span>
-        <div class="acts">
-          <a class="dl-btn view-btn" href="${viewURL(r.file)}" target="_blank" rel="noopener" title="Preview in browser — no download">${eyeSvg}View</a>
-          <a class="dl-btn" href="${r.file}" download>${dlSvg}Download</a>
-        </div>
+      <div class="stop-acts">
+        <a class="stop-dl stop-view" href="${esc(viewURL(s.file))}" target="_blank" rel="noopener"
+           title="Preview in browser — no download">${eyeSvg}View</a>
+        <a class="stop-dl" href="${esc(s.file)}" download>${dlSvg}Deck</a>
       </div>
+    </div>
+  </div>`;
+}
+
+function resourceHTML(r) {
+  return `<div class="rcard">
+    <div class="icon ${esc(r.cls)}">${esc(r.icon)}</div>
+    <div class="kind">${esc(r.kind)}</div>
+    <h3>${esc(r.title)}</h3>
+    <p>${r.desc}</p>
+    <div class="foot">
+      <span class="size" data-size-for="${esc(r.file)}">${extOf(r.file)}</span>
+      <div class="acts">
+        <a class="dl-btn view-btn" href="${esc(viewURL(r.file))}" target="_blank" rel="noopener"
+           title="Preview in browser — no download">${eyeSvg}View</a>
+        <a class="dl-btn" href="${esc(r.file)}" download>${dlSvg}Download</a>
+      </div>
+    </div>
+  </div>`;
+}
+
+function fillSecHead(key, sec) {
+  const el = document.querySelector(`.sec-head[data-sec="${key}"]`);
+  if (!el || !sec) return;
+  el.querySelector(".sec-tag").textContent = sec.tag || "";
+  el.querySelector("h2").textContent = sec.h || "";
+  const p = el.querySelector("p");
+  if (sec.p) p.innerHTML = sec.p; else p.remove();
+}
+
+// File sizes are read from the server rather than stored, so they can never
+// drift out of date when a document is re-uploaded.
+async function annotateSizes(files) {
+  await Promise.all(files.map(async f => {
+    const el = document.querySelector(`[data-size-for="${CSS.escape(f)}"]`);
+    if (!el) return;
+    try {
+      const res = await fetch(f, { method: "HEAD" });
+      const len = res.headers.get("content-length");
+      if (len) el.textContent = `${fmtBytes(+len)} · ${extOf(f)}`;
+    } catch { /* leave the extension-only label */ }
+  }));
+}
+
+function render(data) {
+  // ── Hero ──
+  const hero = data.hero || {};
+  if (hero.eyebrow) document.getElementById("heroEyebrow").textContent = hero.eyebrow;
+  if (hero.lede)    document.getElementById("heroLede").innerHTML = hero.lede;
+  document.getElementById("heroStats").innerHTML = (hero.stats || []).map(s =>
+    `<div class="stat"><div class="num">${s.accent ? `<span>${esc(s.num)}</span>` : esc(s.num)}</div>
+     <div class="lbl">${esc(s.lbl)}</div></div>`).join("");
+
+  // ── Section headings ──
+  Object.entries(data.sections || {}).forEach(([k, v]) => fillSecHead(k, v));
+
+  // ── Days + sessions (any number of days, any number of sessions) ──
+  document.getElementById("dayBlocks").innerHTML = (data.days || []).map(d => `
+    <div class="day-block reveal">
+      <div class="day-label"><span class="d">${esc(d.label)}</span><span class="t">${esc(d.sub)}</span></div>
+      <div class="timeline">${(d.sessions || []).map(stopHTML).join("")}</div>
     </div>`).join("");
 
-  // ── Reveal on scroll ──
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} });
-  },{threshold:.12});
-  document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+  // ── Trainer kit ──
+  document.getElementById("resGrid").innerHTML = (data.resources || []).map(resourceHTML).join("");
 
-  // ── Progress rail ──
-  const rf = document.getElementById("railFill");
-  function onScroll(){
-    const h = document.documentElement.scrollHeight - window.innerHeight;
-    rf.style.height = (window.scrollY / h * 100) + "vh";
+  // ── How-to steps ──
+  document.getElementById("stepGrid").innerHTML = (data.steps || []).map(s =>
+    `<div class="step"><div class="n">${esc(s.n)}</div><h4>${esc(s.h)}</h4><p>${s.p}</p></div>`).join("");
+
+  // ── Download-all band ──
+  const all = (data.sections || {}).all || {};
+  if (all.h) document.getElementById("allH").textContent = all.h;
+  if (all.p) document.getElementById("allP").innerHTML = all.p;
+  const site = data.site || {};
+  if (site.zip)  document.getElementById("zipBtn").href = site.zip;
+  if (site.repo) document.getElementById("repoBtn").href = site.repo;
+
+  // ── Footer ──
+  const foot = data.footer || {};
+  if (foot.blurb)   document.getElementById("footBlurb").textContent = foot.blurb;
+  if (foot.tagline) document.getElementById("footTagline").textContent = foot.tagline;
+  document.getElementById("footMaterials").innerHTML = (data.resources || [])
+    .slice(0, 4).map(r => `<a href="#resources">${esc(r.title)}</a>`).join("");
+  if (data.updated) {
+    const d = new Date(data.updated + "T00:00:00");
+    document.getElementById("footUpdated").textContent =
+      "Materials updated " + d.toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" });
   }
-  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
 
-  // ── Card glow follow ──
-  document.getElementById("resGrid").addEventListener("mousemove", e=>{
-    const c = e.target.closest(".rcard"); if(!c) return;
+  // ── Behaviours that depend on rendered nodes ──
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: .12 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  document.getElementById("resGrid").addEventListener("mousemove", e => {
+    const c = e.target.closest(".rcard"); if (!c) return;
     const r = c.getBoundingClientRect();
-    c.style.setProperty("--mx", (e.clientX-r.left)+"px");
-    c.style.setProperty("--my", (e.clientY-r.top)+"px");
+    c.style.setProperty("--mx", (e.clientX - r.left) + "px");
+    c.style.setProperty("--my", (e.clientY - r.top) + "px");
+  });
+
+  const files = [
+    ...(data.days || []).flatMap(d => (d.sessions || []).map(s => s.file)),
+    ...(data.resources || []).map(r => r.file)
+  ];
+  annotateSizes(files);
+}
+
+// ── Mobile nav (works regardless of whether content loads) ──
+const navToggle = document.getElementById("navToggle");
+const navLinks  = document.getElementById("navLinks");
+navToggle.addEventListener("click", () => {
+  const open = navToggle.getAttribute("aria-expanded") === "true";
+  navToggle.setAttribute("aria-expanded", String(!open));
+  navLinks.classList.toggle("open", !open);
+});
+navLinks.addEventListener("click", e => {
+  if (e.target.tagName === "A") {
+    navLinks.classList.remove("open");
+    navToggle.setAttribute("aria-expanded", "false");
+  }
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && navLinks.classList.contains("open")) {
+    navLinks.classList.remove("open");
+    navToggle.setAttribute("aria-expanded", "false");
+    navToggle.focus();
+  }
+});
+
+// ── Progress rail ──
+const rf = document.getElementById("railFill");
+function onScroll() {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  rf.style.height = (h > 0 ? window.scrollY / h * 100 : 0) + "vh";
+}
+window.addEventListener("scroll", onScroll, { passive: true });
+
+// ── Load content ──
+fetch("content.json", { cache: "no-cache" })
+  .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+  .then(data => { render(data); onScroll(); })
+  .catch(err => {
+    console.error("Could not load content.json:", err);
+    document.getElementById("fallback").hidden = false;
   });
 </script>
 </body>

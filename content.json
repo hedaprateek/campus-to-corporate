@@ -1,0 +1,81 @@
+{
+  "updated": "2026-08-17",
+  "site": {
+    "title": "Campus to Corporate Ready — Workshop Hub",
+    "repo": "https://github.com/hedaprateek/campus-to-corporate",
+    "zip": "https://github.com/hedaprateek/campus-to-corporate/archive/refs/heads/main.zip"
+  },
+  "hero": {
+    "eyebrow": "2-Day Workshop · Complete Package",
+    "lede": "Everything you need to run <strong>Campus to Corporate Ready</strong> — ten animated session decks, a full facilitator guide, participant handouts, and a modern-workplace supplement. Built for final-year students stepping into their first job.",
+    "stats": [
+      { "num": "10", "lbl": "Session decks" },
+      { "num": "2", "lbl": "Full days, 9–6" },
+      { "num": "4", "lbl": "Trainer documents" },
+      { "num": "100+", "lbl": "Slides, all animated", "accent": true }
+    ]
+  },
+  "days": [
+    {
+      "id": "day1",
+      "label": "Day 1",
+      "sub": "Foundations · 9:00 AM – 6:00 PM",
+      "sessions": [
+        { "n": 1, "t": "Understanding the Corporate World", "time": "9:00–10:30", "slides": 12, "anim": true, "mod": true, "file": "materials/decks/S1_Corporate_World.pptx" },
+        { "n": 2, "t": "Professional Etiquettes & Behaviour", "time": "10:45–12:15", "slides": 11, "anim": true, "mod": true, "file": "materials/decks/S2_Etiquettes.pptx" },
+        { "n": 3, "t": "Communication Skills", "time": "1:15–2:45", "slides": 10, "anim": true, "mod": false, "file": "materials/decks/S3_Communication.pptx" },
+        { "n": 4, "t": "Teamwork & Workplace Collaboration", "time": "3:00–4:30", "slides": 11, "anim": true, "mod": true, "file": "materials/decks/S4_Teamwork.pptx" },
+        { "n": 5, "t": "Day 1 Recap & Reflection", "time": "5:00–6:00", "slides": 9, "anim": true, "mod": false, "file": "materials/decks/S5_Day1_Recap.pptx" }
+      ]
+    },
+    {
+      "id": "day2",
+      "label": "Day 2",
+      "sub": "Readiness · 9:00 AM – 6:00 PM",
+      "sessions": [
+        { "n": 6, "t": "Personal Branding & Career Readiness", "time": "9:00–10:30", "slides": 11, "anim": true, "mod": true, "file": "materials/decks/S6_Personal_Branding.pptx" },
+        { "n": 7, "t": "Interview Skills & All Rounds", "time": "10:45–12:30", "slides": 11, "anim": true, "mod": true, "file": "materials/decks/S7_Interview_Skills.pptx" },
+        { "n": 8, "t": "Workplace Ethics, Attitude & Growth Mindset", "time": "1:30–3:00", "slides": 12, "anim": true, "mod": true, "file": "materials/decks/S8_Ethics_Mindset.pptx" },
+        { "n": 9, "t": "Mock Interview & Peer Feedback", "time": "3:15–4:45", "slides": 8, "anim": true, "mod": false, "file": "materials/decks/S9_Mock_Interview.pptx" },
+        { "n": 10, "t": "Closing, Certificates & Motivation", "time": "5:00–6:00", "slides": 10, "anim": true, "mod": true, "file": "materials/decks/S10_Closing.pptx" }
+      ]
+    }
+  ],
+  "resources": [
+    { "kind": "Trainer Manual", "cls": "g", "icon": "📕", "title": "Facilitator Guide", "desc": "28 pages. Minute-by-minute timing, opening scripts, slide talking points, activity facilitation, and 2025 delivery notes for every session.", "file": "materials/guides/Facilitator_Guide.docx" },
+    { "kind": "Participant Workbook", "cls": "h", "icon": "📝", "title": "Participant Handout Pack", "desc": "Ten printable, fill-in worksheets — one per session. Company map, PREP practice, STAR builder, mindset audit, commitment card, and more.", "file": "materials/handouts/Participant_Handout_Pack.docx" },
+    { "kind": "Program Operations", "cls": "g", "icon": "🧰", "title": "Program Toolkit", "desc": "The pre-workshop diagnostic, the 30-day follow-up sequence, and the before/after impact scorecard — the pieces that make the learning stick.", "file": "materials/guides/Program_Toolkit.docx" },
+    { "kind": "Deep-Dive Reference", "cls": "g", "icon": "🏭", "title": "Industry Readiness Playbook", "desc": "The campus-vs-industry gap, real-world simulations, tool fluency, and industry-specific tracks — for going beyond the two days.", "file": "materials/guides/Industry_Readiness_Playbook.docx" },
+    { "kind": "Drop-in Slides", "cls": "s", "icon": "⚡", "title": "Modern Workplace 2025 Supplement", "desc": "Ten standalone slides on AI at work, remote collaboration, the modern fresher toolkit, and three interactive QR moments. Slot into any session.", "file": "materials/supplements/Modern_Workplace_2025_Supplement.pptx" }
+  ],
+  "sections": {
+    "journey": {
+      "tag": "The 2 days",
+      "h": "Ten sessions, one continuous arc.",
+      "p": "Each session builds on the last — from understanding the workplace to walking out interview-ready. Every deck opens with objectives and closes with a quote, with real-world scenarios, data, and activities in between. Several include 2025 modern-workplace content: AI at work, remote collaboration, and scannable QR moments. View or download any deck straight from its stop on the path."
+    },
+    "resources": {
+      "tag": "The trainer kit",
+      "h": "Everything around the slides.",
+      "p": "The documents that turn a set of decks into a workshop anyone can deliver."
+    },
+    "start": {
+      "tag": "How to use this",
+      "h": "From download to delivery in four steps."
+    },
+    "all": {
+      "h": "Take the whole package.",
+      "p": "All ten session decks, the facilitator guide, handouts, program toolkit, industry playbook, and modern-workplace supplement — in one download. Every deck and document also has a <strong>View</strong> button that opens it straight in your browser, though animations only play properly in PowerPoint."
+    }
+  },
+  "steps": [
+    { "n": "01", "h": "Read the guide first", "p": "The Facilitator Guide has minute-by-minute timing, opening scripts, and talking points for all ten sessions. Start there." },
+    { "n": "02", "h": "Print the handouts", "p": "One Participant Handout Pack per person — ten fill-in worksheets that match each session. Print double-sided." },
+    { "n": "03", "h": "Load the decks", "p": "Open each session deck in PowerPoint. Animations advance on click. Swap the placeholder QR links for your own before delivery." },
+    { "n": "04", "h": "Run the program", "p": "Use the Program Toolkit for the pre-workshop diagnostic, the 30-day follow-up, and the before/after impact scorecard." }
+  ],
+  "footer": {
+    "blurb": "A complete, ready-to-deliver 2-day workshop that prepares final-year students for their first job — the shift from campus habits to corporate expectations.",
+    "tagline": "Built for trainers and the students they prepare."
+  }
+}
