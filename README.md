@@ -8,6 +8,17 @@ A complete, ready-to-deliver **2-day workshop** that prepares final-year student
 
 ---
 
+## Viewing without downloading
+
+Every deck and document on the site has a **View** button next to its download. It opens the file in Microsoft's free Office Web Viewer (`view.officeapps.live.com`) — no account, no download.
+
+Two things to know:
+
+- **Animations don't play reliably in the viewer.** The decks are built around click-advance builds; treat online view as a preview and deliver from PowerPoint.
+- **The viewer needs the file to be publicly reachable.** It fetches the URL from Microsoft's servers. If this repository is ever made private, the View buttons stop working (downloads would too) — nothing else to change, but don't expect it to fail gracefully.
+
+---
+
 ## What's inside
 
 ```
