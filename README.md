@@ -2,8 +2,9 @@
 
 A complete, ready-to-deliver **2-day workshop** that prepares final-year students for their first job. This repository hosts every deliverable — ten animated session decks, a facilitator guide, participant handouts, program-operations documents, and a modern-workplace supplement — behind a single landing page.
 
-**Live site:** `https://<your-username>.github.io/<repo-name>/`
-(fill this in after you enable GitHub Pages — see below)
+**Live site:** https://hedaprateek.github.io/campus-to-corporate/
+
+> GitHub Pages serves this repository from the **root** of `main`. `index.html`, `.nojekyll`, and `materials/` must stay at the top level — if they get nested inside a subfolder, the live URL 404s and every download link breaks.
 
 ---
 
