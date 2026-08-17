@@ -8,56 +8,57 @@ A complete, ready-to-deliver **2-day workshop** that prepares final-year student
 
 ---
 
-## Editing the site — the admin page
+## Editing the site — the content editor
 
 **<https://hedaprateek.github.io/campus-to-corporate/admin.html>**
 
-Everything on the landing page comes from [`content.json`](content.json), and the admin page is a form
-over that file plus an uploader for the materials. It commits straight to this repository through the
-GitHub API — there is no server involved. After any change, GitHub Pages redeploys and the live site
-updates in about a minute.
+Everything on the landing page comes from [`content.json`](content.json), and the editor is a form over
+that file. It is **entirely static**: no server, no login, no API calls. It edits the content in your
+browser, hands you the updated file, and GitHub's own website does the committing.
 
-### Signing in
-
-You need a **fine-grained personal access token**, created once at
-[github.com/settings/personal-access-tokens](https://github.com/settings/personal-access-tokens/new):
-
-- **Repository access** → *Only select repositories* → `campus-to-corporate`
-- **Repository permissions** → **Contents: Read and write**
-- Set an expiry date
-
-Paste it into the admin page and tick *Remember on this device*.
-
-> **What this means for security.** The token is a real credential and it is stored in your browser's
-> local storage. Scoped as above its reach is limited to this one repository — it cannot touch your
-> other repos or your account settings — but anyone using your browser profile could write to this
-> repo with it. Untick *Remember* on a shared machine, use **Forget token** when you're done, and let
-> the expiry do its job. The admin page itself is public, which is harmless: it does nothing at all
-> without a token.
+That last part is deliberate. Committing through the GitHub API from a browser needs a cross-origin
+request to `api.github.com`, which corporate proxies and security appliances routinely intercept —
+producing CORS failures that cannot be fixed from this end. Using github.com's normal upload page is
+just an ordinary page visit, so it works from any network that can reach GitHub at all.
 
 ### Replacing a deck or document
 
-Under **Materials**, find the file and click **Replace…**. Pick the new version from your computer and
-it overwrites the file at the same path — so every link on the site, and any link you have already
-shared, keeps working. The page warns you if the new file's extension doesn't match the old one.
+1. Open the editor and find the file under **Materials**.
+2. Click **Upload replacement ↗** — this opens GitHub's uploader already pointed at the right folder.
+3. Drag the new version in, **keeping exactly the same filename** (there's a *Copy filename* button
+   next to each file), and click *Commit changes*.
 
-You don't need to keep the same filename: use **Upload a new file** with a new path, then point the
-matching session or resource at it under *Days & sessions* or *Trainer kit* and save.
+The path never changes, so every link on the site — and any link you have already shared — keeps
+working. The site updates about a minute later.
 
-File sizes shown on the site are read from the server at page load, so they update themselves — there
-is nothing to edit after a replacement.
+File sizes on the site are read from the server at page load, so they correct themselves after a
+replacement. There is nothing else to update.
+
+> Uploading a file with a **different** name adds it alongside the old one rather than replacing it.
+> If you want to do that, also update the matching *Deck file path* in the editor and commit the new
+> `content.json` as below.
 
 ### Changing text and structure
 
 The remaining panels edit every piece of copy on the page: hero, section headings, days, sessions,
 trainer-kit documents, how-to steps, and the footer. Sessions, resources, stats and steps can be
-added, reordered (↑ ↓) and deleted; whole days can be added or removed. Deleting an entry removes it
-from the page but leaves the underlying file in the repository.
+added, reordered (↑ ↓) and deleted; whole days can be added or removed. Removing an entry takes it off
+the page but leaves the underlying file in the repository.
 
-Click **Save changes** to commit. The "materials updated" date in the footer is stamped automatically.
+When you're done:
 
-> If someone edits `content.json` directly on GitHub while you have the admin page open, saving will
-> fail with a conflict rather than overwrite them. Hit **Reload** and redo the edit.
+1. Click **Download content.json** (or **Copy JSON** to paste instead).
+2. Open <https://github.com/hedaprateek/campus-to-corporate/upload/main> and drop the downloaded
+   `content.json` in — same filename, so it replaces the published one.
+3. Commit. The site updates in about a minute.
+
+Your edits are kept in the browser's local storage as you work, so closing the tab by accident doesn't
+lose them — the editor offers to restore the draft next time. **Discard changes** throws the draft away
+and reloads the published content. The "materials updated" date in the footer is stamped for you each
+time you download or copy.
+
+> The editor has no way to detect someone else editing `content.json` in the meantime. If two people
+> are changing content, agree who holds the pen — the last upload wins.
 
 ---
 
@@ -77,8 +78,8 @@ Two things to know:
 ```
 .
 ├── index.html                     ← the landing page
-├── content.json                   ← all page content; the admin page edits this
-├── admin.html                     ← edit content & replace materials (needs a token)
+├── content.json                   ← all page content; the editor edits this
+├── admin.html                     ← static content editor (no server, no login)
 ├── assets/
 │   ├── og-preview.png             ← the image shown when the link is shared
 │   └── og-preview-source.html     ← how that image was made; re-render to update it
@@ -147,7 +148,7 @@ That's the link you share. Anyone can open it and download the materials.
 
 ## Updating the materials later
 
-The easy way is the [admin page](#editing-the-site--the-admin-page) — no git needed.
+The easy way is the [content editor](#editing-the-site--the-content-editor) — no git needed.
 
 To do it from a terminal instead, replace any file in `materials/` with a newer version (keeping the
 same filename), then:

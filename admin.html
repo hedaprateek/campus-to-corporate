@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Workshop Hub — Admin</title>
-<!-- Keep this page out of search results. It is harmless without a token,
-     but there is no reason for it to be indexed. -->
+<title>Workshop Hub — Content Editor</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230EA5C8'/%3E%3Ctext x='16' y='23' font-family='Verdana,sans-serif' font-size='18' font-weight='bold' fill='%230A1628' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
 <style>
@@ -21,19 +19,17 @@
   .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
   a{color:var(--teal-bright)}
   h1{font-size:19px;font-weight:600;letter-spacing:-.01em}
-  h2{font-size:16px;font-weight:600;margin-bottom:4px}
 
   header{position:sticky;top:0;z-index:20;background:rgba(10,22,40,.94);backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line)}
-  .head-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;height:62px}
+  .head-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:62px;
+    flex-wrap:wrap;padding:10px 0}
   .head-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-  .dot{width:9px;height:9px;border-radius:50%;background:var(--muted);flex-shrink:0}
-  .dot.ok{background:var(--green)} .dot.err{background:var(--red)}
-  .who{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+  .sub{font-size:12.5px;color:var(--muted)}
 
   button{font-family:inherit;font-size:13.5px;font-weight:600;border:none;border-radius:8px;
     padding:9px 15px;cursor:pointer;transition:background .18s,transform .12s,opacity .18s;
-    display:inline-flex;align-items:center;gap:7px}
+    display:inline-flex;align-items:center;gap:7px;text-decoration:none}
   button:disabled{opacity:.45;cursor:not-allowed}
   .primary{background:var(--teal);color:var(--navy)}
   .primary:hover:not(:disabled){background:var(--teal-bright)}
@@ -42,6 +38,7 @@
   .danger{background:transparent;color:#F1A0A2;border:1px solid rgba(229,72,77,.4)}
   .danger:hover:not(:disabled){background:rgba(229,72,77,.12)}
   .tiny{padding:5px 10px;font-size:12px;border-radius:6px}
+  a.btnlink{text-decoration:none}
 
   input,textarea,select{font-family:inherit;font-size:13.5px;width:100%;background:var(--navy);
     color:var(--text);border:1px solid var(--line);border-radius:8px;padding:9px 11px;transition:border-color .18s}
@@ -79,150 +76,113 @@
   .note{background:rgba(14,165,200,.07);border:1px solid rgba(14,165,200,.25);border-radius:10px;
     padding:14px 16px;font-size:13px;color:#BBD3E4;margin-bottom:16px}
   .note strong{color:#fff}
+  .note code{background:rgba(0,0,0,.35);padding:1px 5px;border-radius:4px;font-size:12.5px}
   .warn{background:rgba(224,168,30,.08);border-color:rgba(224,168,30,.3);color:#E8D7AE}
+  .warn strong{color:#fff}
 
-  #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120%);
+  ol.steps{margin:10px 0 0 18px;display:flex;flex-direction:column;gap:7px}
+  ol.steps li{padding-left:4px}
+
+  #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(140%);
     background:var(--navy-3);border:1px solid var(--line);border-radius:10px;padding:13px 20px;
     font-size:13.5px;z-index:60;transition:transform .28s cubic-bezier(.2,.8,.3,1);max-width:90vw;
     box-shadow:0 16px 40px -12px rgba(0,0,0,.6)}
   #toast.show{transform:translateX(-50%) translateY(0)}
   #toast.ok{border-color:rgba(48,164,108,.5)} #toast.err{border-color:rgba(229,72,77,.5)}
 
-  .gate{max-width:520px;margin:70px auto;padding:0 20px}
-  .gate .panel-body{padding:26px}
-  .drop{border:1.5px dashed var(--line);border-radius:11px;padding:26px;text-align:center;
-    color:var(--muted);transition:border-color .2s,background .2s;cursor:pointer}
-  .drop:hover,.drop.over{border-color:var(--teal);background:rgba(14,165,200,.05);color:var(--text)}
   .file-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;
     border-bottom:1px solid var(--line);flex-wrap:wrap}
   .file-row:last-child{border-bottom:none}
   .file-path{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;color:var(--muted);word-break:break-all}
   .file-name{font-weight:600;font-size:13.5px}
+  .pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--navy);background:var(--gold);padding:2px 8px;border-radius:20px;margin-left:8px}
   .hidden{display:none!important}
-  .spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.25);border-top-color:currentColor;
-    border-radius:50%;animation:spin .7s linear infinite;display:inline-block}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden;margin-top:8px}
-  .bar > i{display:block;height:100%;background:var(--teal);width:0;transition:width .25s}
 </style>
 </head>
 <body>
 
-<!-- ── TOKEN GATE ───────────────────────────────────────────── -->
-<div class="gate" id="gate">
-  <div class="panel">
+<header>
+  <div class="wrap head-inner">
+    <div>
+      <h1>Workshop Hub — Content Editor</h1>
+      <div class="sub" id="sub">Loading…</div>
+    </div>
+    <div class="head-actions">
+      <a class="btnlink" href="index.html" target="_blank" rel="noopener"><button class="ghost tiny">View site ↗</button></a>
+      <button class="ghost tiny" id="revert">Discard changes</button>
+      <button class="ghost" id="copyBtn" disabled>Copy JSON</button>
+      <button class="primary" id="dlBtn" disabled>Download content.json</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:24px;padding-bottom:80px">
+
+  <div class="note" id="howto">
+    <strong>How this works.</strong> This page has no server and never contacts the GitHub API — it edits
+    the content in your browser and hands you a file. GitHub's own website does the committing, which is
+    an ordinary page visit, so nothing here can be blocked by a proxy.
+    <ol class="steps">
+      <li>Edit whatever you need below.</li>
+      <li>Click <strong>Download content.json</strong> (or <strong>Copy JSON</strong>).</li>
+      <li>Open <a id="uploadRoot" target="_blank" rel="noopener">the repository uploader</a> and drop the
+          downloaded <code>content.json</code> in. Keeping the same filename replaces the old one.</li>
+      <li>Click <em>Commit changes</em> on GitHub. The site updates in about a minute.</li>
+    </ol>
+  </div>
+
+  <div class="note warn hidden" id="draftNote">
+    <strong>Unsaved edits restored.</strong> You have changes from a previous visit that were never
+    downloaded. Continue editing, or <a href="#" id="dropDraft">discard them</a>.
+  </div>
+
+  <details class="panel" open>
+    <summary>
+      <span class="sum-l"><span>Materials</span><small>Replace a deck or document — same filename overwrites it</small></span>
+      <span class="chev">›</span>
+    </summary>
     <div class="panel-body">
-      <h1 style="margin-bottom:6px">Workshop Hub — Admin</h1>
-      <p style="color:var(--muted);margin-bottom:20px">Sign in with a GitHub token to edit content and replace materials.</p>
-
       <div class="note">
-        <strong>Create a fine-grained token</strong> at
-        <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens</a>:
-        set <em>Repository access</em> to <strong>only</strong> <code>campus-to-corporate</code>, and under
-        <em>Repository permissions</em> set <strong>Contents: Read and write</strong>. Give it an expiry date.
-        Nothing else is needed.
+        <strong>To replace a file:</strong> click <em>Upload replacement</em> next to it. That opens GitHub's
+        uploader already pointed at the right folder — drag the new version in, keeping
+        <strong>exactly the same filename</strong>, and commit. Every link on the site (and any link you
+        have already shared) keeps working, because the path never changes.
+        <br><br>
+        Uploading a file with a <em>different</em> name adds it alongside the old one instead of replacing
+        it. If you do that, update the matching <em>Deck file path</em> below and re-download the JSON.
       </div>
-      <div class="note warn">
-        The token is stored in this browser's local storage so you don't have to paste it each time.
-        Anyone with access to this browser profile can use it to write to that one repository.
-        Use <strong>Forget token</strong> on a shared machine, and let it expire.
-      </div>
-
-      <div class="field">
-        <label for="tokenInput">GitHub token</label>
-        <input id="tokenInput" type="password" placeholder="github_pat_..." autocomplete="off" spellcheck="false">
-      </div>
-      <div class="field">
-        <label class="check"><input type="checkbox" id="remember" checked> Remember on this device</label>
-      </div>
-      <button class="primary" id="signIn">Sign in</button>
-      <p id="gateErr" style="color:#F1A0A2;margin-top:14px;font-size:13px"></p>
+      <div id="fileList"></div>
     </div>
-  </div>
-</div>
+  </details>
 
-<!-- ── APP ──────────────────────────────────────────────────── -->
-<div id="app" class="hidden">
-  <header>
-    <div class="wrap head-inner">
-      <div>
-        <h1>Workshop Hub — Admin</h1>
-        <div class="who"><span class="dot ok" id="statusDot"></span><span id="whoami">connected</span></div>
-      </div>
-      <div class="head-actions">
-        <a href="index.html" target="_blank" rel="noopener"><button class="ghost tiny">View site ↗</button></a>
-        <button class="ghost tiny" id="reload">Reload</button>
-        <button class="danger tiny" id="forget">Forget token</button>
-        <button class="primary" id="save" disabled>Save changes</button>
-      </div>
-    </div>
-  </header>
+  <div id="editor"></div>
 
-  <div class="wrap" style="padding-top:24px;padding-bottom:80px">
-
-    <div class="note" id="dirtyNote" style="display:none">
-      You have unsaved changes. <strong>Save changes</strong> commits them to GitHub; the live site
-      updates about a minute later.
-    </div>
-
-    <!-- ── FILES ── -->
-    <details class="panel" open>
-      <summary>
-        <span class="sum-l"><span>Materials</span><small>Replace a deck or document — same filename overwrites it</small></span>
-        <span class="chev">›</span>
-      </summary>
-      <div class="panel-body">
-        <div class="note">
-          Pick a file below and choose the new version from your computer. It keeps the same path, so
-          every link on the site keeps working — the file is simply replaced. GitHub Pages redeploys in
-          about a minute. If the new file has a different name, use <em>Upload a new file</em> at the bottom
-          and then point the matching session or resource at the new path.
-        </div>
-        <div id="fileList"></div>
-
-        <div class="card" style="margin-top:18px">
-          <div class="card-head"><span class="card-title">Upload a new file</span></div>
-          <div class="row c2">
-            <div class="field">
-              <label for="newPath">Destination path</label>
-              <input id="newPath" placeholder="materials/decks/S11_New_Session.pptx" spellcheck="false">
-            </div>
-            <div class="field">
-              <label for="newFile">File</label>
-              <input id="newFile" type="file">
-            </div>
-          </div>
-          <button class="ghost" id="uploadNew">Upload file</button>
-        </div>
-      </div>
-    </details>
-
-    <!-- ── SECTIONS (generated) ── -->
-    <div id="editor"></div>
-
-  </div>
 </div>
 
 <div id="toast"></div>
 
 <script>
 /* ══════════════════════════════════════════════════════════════
-   Admin for the Campus to Corporate workshop hub.
+   Static content editor for the Campus to Corporate workshop hub.
 
-   Everything happens client-side against the GitHub Contents API:
-   content.json and the material files are committed straight to the
-   repo, and GitHub Pages redeploys. There is no server here.
+   Deliberately does no cross-origin networking. It reads
+   content.json from its own origin, edits it in memory, and hands
+   the result back as a download. Committing is done through
+   github.com's normal web UI, so corporate proxies that interfere
+   with api.github.com are irrelevant here.
    ══════════════════════════════════════════════════════════════ */
 
-const OWNER  = "hedaprateek";
-const REPO   = "campus-to-corporate";
+const OWNER = "hedaprateek";
+const REPO  = "campus-to-corporate";
 const BRANCH = "main";
-const API    = "https://api.github.com";
-const TOKEN_KEY = "c2c_admin_token";
+const DRAFT_KEY = "c2c_draft_v1";
 
-let token = sessionStorage.getItem(TOKEN_KEY) || localStorage.getItem(TOKEN_KEY) || "";
-let data = null;        // parsed content.json
-let contentSha = null;  // sha of content.json, needed to commit an update
+const REPO_UPLOAD = dir =>
+  `https://github.com/${OWNER}/${REPO}/upload/${BRANCH}${dir ? "/" + dir : ""}`;
+
+let data = null;      // working copy
+let pristine = null;  // as loaded from content.json, for Discard
 let dirty = false;
 
 /* ── helpers ───────────────────────────────────────────────── */
@@ -239,158 +199,105 @@ function toast(msg, kind = "") {
   t.textContent = msg;
   t.className = "show " + kind;
   clearTimeout(toast._t);
-  toast._t = setTimeout(() => (t.className = kind), kind === "err" ? 6000 : 3200);
+  toast._t = setTimeout(() => (t.className = kind), kind === "err" ? 6000 : 3400);
 }
 
 function setDirty(v) {
   dirty = v;
-  $("#save").disabled = !v;
-  $("#dirtyNote").style.display = v ? "" : "none";
+  $("#dlBtn").disabled = !v;
+  $("#copyBtn").disabled = !v;
+  $("#sub").textContent = v
+    ? "Unsaved changes — download the JSON and commit it on GitHub"
+    : "In sync with the published content.json";
+  if (v) saveDraft();
 }
+
+// Keep work-in-progress across accidental navigation. This is only a
+// convenience copy; the published content is always content.json.
+function saveDraft() {
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(data)); } catch {}
+}
+function clearDraft() { try { localStorage.removeItem(DRAFT_KEY); } catch {} }
 
 window.addEventListener("beforeunload", e => {
   if (dirty) { e.preventDefault(); e.returnValue = ""; }
 });
 
-async function gh(path, opts = {}) {
-  const res = await fetch(API + path, {
-    ...opts,
-    headers: {
-      Authorization: "Bearer " + token,
-      Accept: "application/vnd.github+json",
-      "X-GitHub-Api-Version": "2022-11-28",
-      ...(opts.headers || {})
-    }
-  });
-  if (res.status === 401) throw new Error("Token rejected (401). It may have expired.");
-  if (res.status === 403) throw new Error("Forbidden (403). The token likely lacks Contents: write on this repo.");
-  if (res.status === 409) throw new Error("Conflict (409) — the file changed on GitHub since it was loaded. Hit Reload and redo this edit.");
-  if (!res.ok) {
-    let detail = "";
-    try { detail = (await res.json()).message || ""; } catch {}
-    throw new Error(`GitHub ${res.status}${detail ? " — " + detail : ""}`);
-  }
-  return res.status === 204 ? null : res.json();
-}
+const serialise = () => JSON.stringify(data, null, 2) + "\n";
 
-// base64 <-> bytes, chunked so large files don't blow the call stack
-const b64ToBytes = b64 => {
-  const bin = atob(b64.replace(/\s/g, ""));
-  const a = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i);
-  return a;
-};
-const bytesToB64 = bytes => {
-  let bin = "", CH = 0x8000;
-  for (let i = 0; i < bytes.length; i += CH) bin += String.fromCharCode(...bytes.subarray(i, i + CH));
-  return btoa(bin);
-};
+/* ── load ──────────────────────────────────────────────────── */
 
-const fmtBytes = b =>
-  b < 1024 ? b + " B" : b < 1048576 ? Math.round(b / 1024) + " KB" : (b / 1048576).toFixed(1) + " MB";
-
-async function getSha(path) {
+async function boot() {
+  $("#uploadRoot").href = REPO_UPLOAD("");
   try {
-    const r = await gh(`/repos/${OWNER}/${REPO}/contents/${encodeURI(path)}?ref=${BRANCH}`);
-    return r.sha;
+    const res = await fetch("content.json", { cache: "no-cache" });   // same origin
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    pristine = await res.json();
   } catch (e) {
-    if (String(e.message).includes("404")) return null;   // new file
-    throw e;
+    $("#sub").textContent = "Could not load content.json — " + e.message;
+    toast("Could not load content.json: " + e.message, "err");
+    return;
   }
-}
 
-async function putFile(path, bytes, message) {
-  const sha = await getSha(path);
-  const res = await gh(`/repos/${OWNER}/${REPO}/contents/${encodeURI(path)}`, {
-    method: "PUT",
-    body: JSON.stringify({
-      message, branch: BRANCH, content: bytesToB64(bytes), ...(sha ? { sha } : {})
-    })
-  });
-  return res.content.sha;
-}
+  const draft = (() => {
+    try { return JSON.parse(localStorage.getItem(DRAFT_KEY) || "null"); } catch { return null; }
+  })();
 
-/* ── sign in ───────────────────────────────────────────────── */
-
-async function signIn(tok, remember) {
-  token = tok.trim();
-  if (!token) throw new Error("Enter a token.");
-  const me = await gh("/user");                    // validates the token
-  // Load the content before revealing the app — otherwise a failed load
-  // leaves an empty page with the error stranded on the hidden gate.
-  await loadContent();
-  (remember ? localStorage : sessionStorage).setItem(TOKEN_KEY, token);
-  $("#whoami").textContent = `${me.login} · ${OWNER}/${REPO}`;
-  $("#gate").classList.add("hidden");
-  $("#app").classList.remove("hidden");
-}
-
-$("#signIn").addEventListener("click", async () => {
-  const btn = $("#signIn");
-  btn.disabled = true; $("#gateErr").textContent = "";
-  try {
-    await signIn($("#tokenInput").value, $("#remember").checked);
-  } catch (e) {
-    $("#gateErr").textContent = e.message;
-  } finally { btn.disabled = false; }
-});
-$("#tokenInput").addEventListener("keydown", e => { if (e.key === "Enter") $("#signIn").click(); });
-
-$("#forget").addEventListener("click", () => {
-  if (dirty && !confirm("You have unsaved changes. Sign out anyway?")) return;
-  localStorage.removeItem(TOKEN_KEY);
-  sessionStorage.removeItem(TOKEN_KEY);
-  location.reload();
-});
-
-$("#reload").addEventListener("click", async () => {
-  if (dirty && !confirm("Discard unsaved changes and reload from GitHub?")) return;
-  await loadContent();
-  toast("Reloaded from GitHub", "ok");
-});
-
-/* ── load / save content.json ──────────────────────────────── */
-
-async function loadContent() {
-  const r = await gh(`/repos/${OWNER}/${REPO}/contents/content.json?ref=${BRANCH}`);
-  contentSha = r.sha;
-  const text = new TextDecoder().decode(b64ToBytes(r.content || ""));
-  try {
-    data = JSON.parse(text);
-  } catch (e) {
-    throw new Error("content.json in the repository is not valid JSON — fix it on GitHub before using this editor. (" + e.message + ")");
-  }
-  setDirty(false);
-  renderEditor();
-  renderFiles();
-}
-
-$("#save").addEventListener("click", async () => {
-  const btn = $("#save");
-  const label = btn.textContent;
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spin"></span>Saving';
-  try {
-    data.updated = new Date().toISOString().slice(0, 10);   // stamp the footer date
-    const bytes = new TextEncoder().encode(JSON.stringify(data, null, 2) + "\n");
-    const res = await gh(`/repos/${OWNER}/${REPO}/contents/content.json`, {
-      method: "PUT",
-      body: JSON.stringify({
-        message: "Update site content via admin",
-        branch: BRANCH,
-        content: bytesToB64(bytes),
-        sha: contentSha
-      })
-    });
-    contentSha = res.content.sha;
+  if (draft) {
+    data = draft;
+    $("#draftNote").classList.remove("hidden");
+    renderAll();
+    setDirty(true);
+  } else {
+    data = structuredClone(pristine);
+    renderAll();
     setDirty(false);
-    renderEditor();
-    toast("Saved. The live site updates in about a minute.", "ok");
-  } catch (e) {
-    toast(e.message, "err");
-  } finally {
-    btn.innerHTML = label;
-    btn.disabled = dirty ? false : true;
+  }
+}
+
+$("#dropDraft").addEventListener("click", e => {
+  e.preventDefault();
+  clearDraft();
+  data = structuredClone(pristine);
+  $("#draftNote").classList.add("hidden");
+  renderAll();
+  setDirty(false);
+  toast("Draft discarded", "ok");
+});
+
+$("#revert").addEventListener("click", () => {
+  if (dirty && !confirm("Discard all changes and go back to the published content?")) return;
+  clearDraft();
+  data = structuredClone(pristine);
+  $("#draftNote").classList.add("hidden");
+  renderAll();
+  setDirty(false);
+  toast("Reverted to published content", "ok");
+});
+
+/* ── output ────────────────────────────────────────────────── */
+
+function stamp() { data.updated = new Date().toISOString().slice(0, 10); }
+
+$("#dlBtn").addEventListener("click", () => {
+  stamp();
+  const blob = new Blob([serialise()], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = el("a", { href: url, download: "content.json" });
+  document.body.append(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  renderAll();
+  toast("Downloaded. Now drop it into the GitHub uploader and commit.", "ok");
+});
+
+$("#copyBtn").addEventListener("click", async () => {
+  stamp();
+  try {
+    await navigator.clipboard.writeText(serialise());
+    renderAll();
+    toast("JSON copied. Paste it over content.json in GitHub's editor.", "ok");
+  } catch {
+    toast("Clipboard blocked — use Download instead.", "err");
   }
 });
 
@@ -416,11 +323,10 @@ function checkField(labelText, obj, key) {
   ]);
 }
 
-function row(cls, kids) { return el("div", { className: "row " + cls }, kids); }
+const row = (cls, kids) => el("div", { className: "row " + cls }, kids);
 
-function panel(title, sub, body, open = false) {
+function panel(title, sub, body) {
   const d = el("details", { className: "panel" });
-  if (open) d.open = true;
   d.append(
     el("summary", {}, [
       el("span", { className: "sum-l" }, [
@@ -434,11 +340,10 @@ function panel(title, sub, body, open = false) {
   return d;
 }
 
-// Card with move-up / move-down / delete wired to an array
 function repeaterCard(title, arr, idx, bodyNodes, onChange) {
   const tools = el("div", { className: "card-tools" });
-  const mk = (txt, title2, fn, disabled) => {
-    const b = el("button", { className: "ghost tiny", textContent: txt, title: title2, disabled });
+  const mk = (txt, hint, fn, disabled) => {
+    const b = el("button", { className: "ghost tiny", textContent: txt, title: hint, disabled });
     b.addEventListener("click", () => { fn(); setDirty(true); onChange(); });
     return b;
   };
@@ -448,7 +353,7 @@ function repeaterCard(title, arr, idx, bodyNodes, onChange) {
     (() => {
       const b = el("button", { className: "danger tiny", textContent: "Delete" });
       b.addEventListener("click", () => {
-        if (!confirm("Delete this entry? The file itself stays in the repository.")) return;
+        if (!confirm("Remove this entry from the page? The file itself stays in the repository.")) return;
         arr.splice(idx, 1); setDirty(true); onChange();
       });
       return b;
@@ -462,16 +367,59 @@ function repeaterCard(title, arr, idx, bodyNodes, onChange) {
 
 function addButton(text, fn) {
   const b = el("button", { className: "ghost", textContent: text });
-  b.addEventListener("click", () => { fn(); setDirty(true); renderEditor(); });
+  b.addEventListener("click", () => { fn(); setDirty(true); renderAll(); });
   return b;
+}
+
+/* ── materials list ────────────────────────────────────────── */
+
+function allFiles() {
+  const out = [];
+  (data.days || []).forEach(d => (d.sessions || []).forEach(s => {
+    if (s.file) out.push({ path: s.file, name: s.t, tag: d.label });
+  }));
+  (data.resources || []).forEach(r => {
+    if (r.file) out.push({ path: r.file, name: r.title, tag: r.kind });
+  });
+  return out;
+}
+
+function renderFiles() {
+  const list = $("#fileList");
+  list.textContent = "";
+  allFiles().forEach(f => {
+    const dir = f.path.split("/").slice(0, -1).join("/");
+    const name = f.path.split("/").pop();
+    const link = el("a", {
+      className: "btnlink", href: REPO_UPLOAD(dir), target: "_blank", rel: "noopener",
+      title: `Opens GitHub's uploader for ${dir}/ — drop a file named ${name} to replace it`
+    }, [el("button", { className: "ghost tiny", textContent: "Upload replacement ↗" })]);
+
+    const copy = el("button", { className: "ghost tiny", textContent: "Copy filename" });
+    copy.addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(name); toast("Copied: " + name, "ok"); }
+      catch { toast("Clipboard blocked", "err"); }
+    });
+
+    list.append(el("div", { className: "file-row" }, [
+      el("div", {}, [
+        el("div", { className: "file-name", textContent: f.name }),
+        el("div", { className: "file-path", textContent: f.path })
+      ]),
+      el("div", { style: "display:flex;align-items:center;gap:8px;flex-wrap:wrap" }, [copy, link])
+    ]));
+  });
 }
 
 /* ── the editor ────────────────────────────────────────────── */
 
 function renderEditor() {
   const root = $("#editor");
+  const openIds = new Set([...root.querySelectorAll("details.panel")]
+    .filter(d => d.open).map(d => d.dataset.k));
   root.textContent = "";
-  const re = renderEditor;
+  const re = renderAll;
+  const add = (key, node) => { node.dataset.k = key; if (openIds.has(key)) node.open = true; root.append(node); };
 
   /* Hero */
   const heroBody = el("div");
@@ -487,18 +435,18 @@ function renderEditor() {
     ], re));
   });
   heroBody.append(addButton("+ Add stat", () => data.hero.stats.push({ num: "", lbl: "" })));
-  root.append(panel("Hero", "Headline area, intro text and the four stats", heroBody));
+  add("hero", panel("Hero", "Headline area, intro text and the stats", heroBody));
 
   /* Section headings */
   const secBody = el("div");
   data.sections ||= {};
-  const SEC_LABELS = {
-    journey:   ["The 2 days", "Heading above the day-by-day timeline"],
-    resources: ["Trainer kit", "Heading above the document cards"],
-    start:     ["How to use this", "Heading above the four steps"],
-    all:       ["Download everything", "The band at the bottom of the page"]
+  const SEC = {
+    journey:   ["The 2 days", "Above the day-by-day timeline"],
+    resources: ["Trainer kit", "Above the document cards"],
+    start:     ["How to use this", "Above the four steps"],
+    all:       ["Download everything", "The band at the bottom"]
   };
-  Object.entries(SEC_LABELS).forEach(([key, [name, hint]]) => {
+  Object.entries(SEC).forEach(([key, [name, hint]]) => {
     const sec = (data.sections[key] ||= {});
     const nodes = [];
     if (key !== "all") nodes.push(field("Eyebrow tag", sec, "tag"));
@@ -511,7 +459,7 @@ function renderEditor() {
       ...nodes
     ]));
   });
-  root.append(panel("Section headings", "The intro copy above each block", secBody));
+  add("sections", panel("Section headings", "The intro copy above each block", secBody));
 
   /* Days and sessions */
   const dayBody = el("div");
@@ -521,11 +469,10 @@ function renderEditor() {
     (d.sessions ||= []).forEach((s, si) => {
       inner.append(repeaterCard(`Session ${s.n ?? si + 1}`, d.sessions, si, [
         field("Title", s, "t"),
-        row("c4", [
+        row("c3", [
           field("Number", s, "n", { type: "number" }),
           field("Time", s, "time", { ph: "9:00–10:30" }),
-          field("Slides", s, "slides", { type: "number" }),
-          el("div", { className: "field" }, [])
+          field("Slides", s, "slides", { type: "number" })
         ]),
         field("Deck file path", s, "file", { ph: "materials/decks/S1_Corporate_World.pptx" }),
         row("c2", [checkField("Animated", s, "anim"), checkField("2025 content", s, "mod")])
@@ -534,7 +481,7 @@ function renderEditor() {
     inner.append(addButton("+ Add session", () =>
       d.sessions.push({ n: (d.sessions.at(-1)?.n ?? 0) + 1, t: "New session", time: "", slides: 0, anim: true, mod: false, file: "" })));
 
-    const wrapCard = el("div", { className: "card" }, [
+    dayBody.append(el("div", { className: "card" }, [
       el("div", { className: "card-head" }, [
         el("span", { className: "card-title", textContent: d.label || `Day ${di + 1}` }),
         (() => {
@@ -547,36 +494,36 @@ function renderEditor() {
         })()
       ]),
       inner
-    ]);
-    dayBody.append(wrapCard);
+    ]));
   });
   dayBody.append(addButton("+ Add day", () =>
     data.days.push({ id: "day" + (data.days.length + 1), label: `Day ${data.days.length + 1}`, sub: "", sessions: [] })));
-  root.append(panel("Days & sessions", `${data.days.length} days, ${data.days.reduce((n, d) => n + (d.sessions?.length || 0), 0)} sessions`, dayBody));
+  add("days", panel("Days & sessions",
+    `${data.days.length} days, ${data.days.reduce((n, d) => n + (d.sessions?.length || 0), 0)} sessions`, dayBody));
 
   /* Resources */
   const resBody = el("div");
   (data.resources ||= []).forEach((r, i) => {
-    const iconSel = el("select");
+    const sel = el("select");
     [["g", "Gold (guides)"], ["h", "Teal (handouts)"], ["s", "Purple (supplements)"]].forEach(([v, t]) => {
       const o = el("option", { value: v, textContent: t });
       if (r.cls === v) o.selected = true;
-      iconSel.append(o);
+      sel.append(o);
     });
-    iconSel.addEventListener("change", () => { r.cls = iconSel.value; setDirty(true); });
+    sel.addEventListener("change", () => { r.cls = sel.value; setDirty(true); });
     resBody.append(repeaterCard(r.title || `Resource ${i + 1}`, data.resources, i, [
       row("c2", [field("Title", r, "title"), field("Kind label", r, "kind")]),
       field("Description (HTML allowed)", r, "desc", { area: true }),
       row("c3", [
         field("Icon (emoji)", r, "icon"),
-        el("div", { className: "field" }, [el("label", { textContent: "Colour" }), iconSel]),
+        el("div", { className: "field" }, [el("label", { textContent: "Colour" }), sel]),
         field("File path", r, "file")
       ])
     ], re));
   });
   resBody.append(addButton("+ Add resource", () =>
     data.resources.push({ kind: "", cls: "g", icon: "📄", title: "New resource", desc: "", file: "" })));
-  root.append(panel("Trainer kit", `${data.resources.length} documents`, resBody));
+  add("resources", panel("Trainer kit", `${data.resources.length} documents`, resBody));
 
   /* Steps */
   const stepBody = el("div");
@@ -588,9 +535,9 @@ function renderEditor() {
   });
   stepBody.append(addButton("+ Add step", () =>
     data.steps.push({ n: String(data.steps.length + 1).padStart(2, "0"), h: "", p: "" })));
-  root.append(panel("How-to steps", `${data.steps.length} steps`, stepBody));
+  add("steps", panel("How-to steps", `${data.steps.length} steps`, stepBody));
 
-  /* Footer + site */
+  /* Footer */
   const footBody = el("div");
   data.footer ||= {}; data.site ||= {};
   footBody.append(
@@ -599,95 +546,14 @@ function renderEditor() {
     field("Repository URL", data.site, "repo"),
     field("ZIP download URL", data.site, "zip"),
     el("p", { style: "color:var(--muted);font-size:12.5px;margin-top:4px",
-      textContent: `The "materials updated" date is stamped automatically each time you save (currently ${data.updated || "unset"}).` })
+      textContent: `The "materials updated" date is set when you download or copy the JSON (currently ${data.updated || "unset"}).` })
   );
-  root.append(panel("Footer & links", "Blurb, tagline and the download links", footBody));
+  add("footer", panel("Footer & links", "Blurb, tagline and the download links", footBody));
 }
 
-/* ── file replacement ──────────────────────────────────────── */
+function renderAll() { renderEditor(); renderFiles(); }
 
-function allFiles() {
-  const out = [];
-  (data.days || []).forEach(d => (d.sessions || []).forEach(s => {
-    if (s.file) out.push({ path: s.file, name: s.t, kind: d.label });
-  }));
-  (data.resources || []).forEach(r => {
-    if (r.file) out.push({ path: r.file, name: r.title, kind: r.kind });
-  });
-  return out;
-}
-
-function renderFiles() {
-  const list = $("#fileList");
-  list.textContent = "";
-  allFiles().forEach(f => {
-    const input = el("input", { type: "file", className: "hidden" });
-    const btn = el("button", { className: "ghost tiny", textContent: "Replace…" });
-    const bar = el("div", { className: "bar hidden" }, [el("i")]);
-
-    btn.addEventListener("click", () => input.click());
-    input.addEventListener("change", async () => {
-      const file = input.files[0];
-      if (!file) return;
-      const ext = p => p.split(".").pop().toLowerCase();
-      if (ext(file.name) !== ext(f.path)) {
-        if (!confirm(`You picked a .${ext(file.name)} but ${f.path} is a .${ext(f.path)}.\n\nReplacing it with a different format will break the file. Continue anyway?`)) {
-          input.value = ""; return;
-        }
-      }
-      btn.disabled = true;
-      btn.innerHTML = '<span class="spin"></span>Uploading';
-      bar.classList.remove("hidden"); bar.firstChild.style.width = "35%";
-      try {
-        const bytes = new Uint8Array(await file.arrayBuffer());
-        bar.firstChild.style.width = "70%";
-        await putFile(f.path, bytes, `Replace ${f.path.split("/").pop()} via admin`);
-        bar.firstChild.style.width = "100%";
-        toast(`Replaced ${f.path.split("/").pop()} (${fmtBytes(bytes.length)}). Live in about a minute.`, "ok");
-        setTimeout(() => { bar.classList.add("hidden"); bar.firstChild.style.width = "0"; }, 1200);
-      } catch (e) {
-        toast(e.message, "err");
-        bar.classList.add("hidden");
-      } finally {
-        btn.disabled = false; btn.textContent = "Replace…"; input.value = "";
-      }
-    });
-
-    list.append(el("div", { className: "file-row" }, [
-      el("div", {}, [
-        el("div", { className: "file-name", textContent: f.name }),
-        el("div", { className: "file-path", textContent: f.path })
-      ]),
-      el("div", { style: "display:flex;align-items:center;gap:10px" }, [btn, input])
-    ]), bar);
-  });
-}
-
-$("#uploadNew").addEventListener("click", async () => {
-  const path = $("#newPath").value.trim().replace(/^\/+/, "");
-  const file = $("#newFile").files[0];
-  if (!path || !file) return toast("Give a destination path and pick a file.", "err");
-  const btn = $("#uploadNew");
-  btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Uploading';
-  try {
-    const bytes = new Uint8Array(await file.arrayBuffer());
-    await putFile(path, bytes, `Add ${path} via admin`);
-    toast(`Uploaded ${path}. Point a session or resource at it, then save.`, "ok");
-    $("#newPath").value = ""; $("#newFile").value = "";
-  } catch (e) {
-    toast(e.message, "err");
-  } finally { btn.disabled = false; btn.textContent = "Upload file"; }
-});
-
-/* ── boot ──────────────────────────────────────────────────── */
-
-if (token) {
-  signIn(token, !!localStorage.getItem(TOKEN_KEY)).catch(e => {
-    $("#gateErr").textContent = e.message + " Sign in again.";
-    localStorage.removeItem(TOKEN_KEY);
-    sessionStorage.removeItem(TOKEN_KEY);
-  });
-}
+boot();
 </script>
 </body>
 </html>
