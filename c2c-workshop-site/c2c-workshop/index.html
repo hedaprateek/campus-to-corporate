@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus to Corporate Ready — Workshop Hub</title>
+<meta name="description" content="The complete 2-day workshop package: 10 session decks, facilitator guide, participant handouts, and modern-workplace supplements. Everything a trainer needs to run Campus to Corporate Ready.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0A1628;
+    --navy-2:#0F1E36;
+    --navy-3:#152242;
+    --teal:#0EA5C8;
+    --teal-bright:#22C3E6;
+    --gold:#E0A81E;
+    --ink:#0A1628;
+    --paper:#F4F7FB;
+    --paper-2:#E8EEF6;
+    --line:rgba(255,255,255,.10);
+    --line-dark:rgba(10,22,40,.12);
+    --muted:#8CA0B8;
+    --muted-dark:#5A6B82;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:var(--navy);
+    color:#E8EEF6;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4,.display{font-family:'Space Grotesk',sans-serif;letter-spacing:-.02em;}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  /* ── Progress rail (fixed left) ── */
+  .rail{position:fixed;left:0;top:0;height:100vh;width:3px;background:var(--line);z-index:50}
+  .rail-fill{width:100%;height:0;background:linear-gradient(var(--teal),var(--gold));transition:height .1s linear}
+
+  /* ── Nav ── */
+  nav{position:sticky;top:0;z-index:40;background:rgba(10,22,40,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:'Space Grotesk';font-weight:600;font-size:15px}
+  .brand .dot{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--teal),var(--gold));display:grid;place-items:center;font-size:13px;color:var(--navy);font-weight:700;flex-shrink:0}
+  .nav-links{display:flex;gap:28px;font-size:14px;color:var(--muted)}
+  .nav-links a{transition:color .2s}
+  .nav-links a:hover{color:var(--teal-bright)}
+  .nav-cta{font-size:13px;font-weight:600;color:var(--navy);background:var(--teal);padding:9px 16px;border-radius:8px;transition:transform .15s,background .2s}
+  .nav-cta:hover{background:var(--teal-bright);transform:translateY(-1px)}
+  @media(max-width:720px){.nav-links{display:none}}
+
+  /* ── Hero ── */
+  .hero{position:relative;padding:96px 0 72px;overflow:hidden}
+  .hero-glow{position:absolute;top:-30%;right:-10%;width:680px;height:680px;border-radius:50%;
+    background:radial-gradient(circle,rgba(14,165,200,.16),transparent 62%);pointer-events:none}
+  .hero-glow-2{position:absolute;bottom:-40%;left:-15%;width:560px;height:560px;border-radius:50%;
+    background:radial-gradient(circle,rgba(224,168,30,.10),transparent 62%);pointer-events:none}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--teal-bright);margin-bottom:26px;
+    border:1px solid var(--line);padding:7px 14px;border-radius:100px;background:rgba(14,165,200,.06)}
+  .eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 rgba(14,165,200,.5);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(14,165,200,.5)}70%{box-shadow:0 0 0 9px rgba(14,165,200,0)}100%{box-shadow:0 0 0 0 rgba(14,165,200,0)}}
+  .hero h1{font-size:clamp(38px,7vw,74px);font-weight:700;line-height:1.02;margin-bottom:24px}
+  .hero h1 .move{position:relative;white-space:nowrap}
+  .hero h1 .campus{color:var(--muted)}
+  .hero h1 .arrow{color:var(--teal);display:inline-block;margin:0 .12em;transform:translateY(2px)}
+  .hero h1 .corp{background:linear-gradient(100deg,var(--teal-bright),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.lede{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:600px;margin-bottom:38px;line-height:1.55}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:56px}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:15px;padding:14px 24px;border-radius:11px;transition:transform .15s,box-shadow .2s,background .2s;cursor:pointer;border:none;font-family:inherit}
+  .btn-primary{background:var(--teal);color:var(--navy);box-shadow:0 6px 22px -6px rgba(14,165,200,.55)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px -8px rgba(14,165,200,.7)}
+  .btn-ghost{background:transparent;color:#E8EEF6;border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal-bright)}
+  .hero-stats{display:flex;gap:44px;flex-wrap:wrap;padding-top:36px;border-top:1px solid var(--line)}
+  .stat .num{font-family:'Space Grotesk';font-size:34px;font-weight:700;color:#fff;line-height:1}
+  .stat .num span{color:var(--teal)}
+  .stat .lbl{font-size:13px;color:var(--muted);margin-top:6px}
+
+  /* ── Section frame ── */
+  section{position:relative}
+  .band{padding:84px 0}
+  .band.light{background:var(--paper);color:var(--ink)}
+  .sec-head{margin-bottom:48px;max-width:620px}
+  .sec-tag{font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .sec-tag::before{content:"";width:26px;height:2px;background:var(--teal)}
+  .light .sec-tag{color:#0883a3}
+  .sec-head h2{font-size:clamp(28px,4.5vw,42px);font-weight:700;line-height:1.08;margin-bottom:16px}
+  .sec-head p{font-size:16.5px;color:var(--muted)}
+  .light .sec-head p{color:var(--muted-dark)}
+
+  /* ── Timeline (the signature) ── */
+  .day-label{display:flex;align-items:baseline;gap:14px;margin:0 0 8px}
+  .day-label .d{font-family:'Space Grotesk';font-size:15px;font-weight:700;color:var(--navy);background:var(--gold);padding:3px 12px;border-radius:6px}
+  .day-label .t{font-size:14px;color:var(--muted-dark);font-weight:500}
+  .day-block{margin-bottom:44px}
+  .timeline{position:relative;margin-left:8px;padding-left:34px}
+  .timeline::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;
+    background:linear-gradient(var(--teal),var(--paper-2))}
+  .stop{position:relative;margin-bottom:14px}
+  .stop::before{content:"";position:absolute;left:-34px;top:22px;width:13px;height:13px;border-radius:50%;
+    background:var(--paper);border:2.5px solid var(--teal);transform:translateX(0);transition:transform .2s,background .2s}
+  .stop:hover::before{background:var(--teal);transform:scale(1.25)}
+  .stop-card{display:flex;align-items:center;gap:18px;background:#fff;border:1px solid var(--line-dark);
+    border-radius:13px;padding:16px 20px;transition:transform .18s,box-shadow .2s,border-color .2s}
+  .stop-card:hover{transform:translateX(5px);box-shadow:0 12px 28px -14px rgba(10,22,40,.28);border-color:var(--teal)}
+  .stop-num{font-family:'Space Grotesk';font-size:13px;font-weight:700;color:#fff;background:var(--navy);
+    width:38px;height:38px;border-radius:9px;display:grid;place-items:center;flex-shrink:0}
+  .stop-body{flex:1;min-width:0}
+  .stop-body h4{font-size:16.5px;font-weight:600;color:var(--ink);margin-bottom:3px}
+  .stop-body .meta{font-size:13px;color:var(--muted-dark);display:flex;gap:14px;flex-wrap:wrap}
+  .stop-body .meta .anim{color:#0883a3;font-weight:500}
+  .stop-dl{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:#0883a3;
+    background:rgba(14,165,200,.09);padding:9px 15px;border-radius:9px;transition:background .2s,transform .15s;flex-shrink:0;white-space:nowrap}
+  .stop-dl:hover{background:rgba(14,165,200,.18);transform:translateY(-1px)}
+  .stop-dl svg{width:15px;height:15px}
+  @media(max-width:640px){
+    .stop-card{flex-wrap:wrap;gap:12px}
+    .stop-dl{width:100%;justify-content:center}
+  }
+
+  /* ── Resource cards (guides/handouts) ── */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+  .rcard{background:var(--navy-2);border:1px solid var(--line);border-radius:16px;padding:28px;
+    transition:transform .2s,border-color .2s,box-shadow .2s;position:relative;overflow:hidden}
+  .rcard::after{content:"";position:absolute;inset:0;border-radius:16px;pointer-events:none;
+    background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),rgba(14,165,200,.08),transparent 40%);opacity:0;transition:opacity .3s}
+  .rcard:hover{transform:translateY(-4px);border-color:rgba(14,165,200,.4);box-shadow:0 18px 40px -18px rgba(0,0,0,.5)}
+  .rcard:hover::after{opacity:1}
+  .rcard .icon{width:46px;height:46px;border-radius:11px;display:grid;place-items:center;margin-bottom:18px;font-size:22px}
+  .rcard .icon.g{background:rgba(224,168,30,.14);border:1px solid rgba(224,168,30,.3)}
+  .rcard .icon.h{background:rgba(14,165,200,.14);border:1px solid rgba(14,165,200,.3)}
+  .rcard .icon.s{background:rgba(124,58,237,.16);border:1px solid rgba(124,58,237,.34)}
+  .rcard .kind{font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+  .rcard h3{font-size:20px;font-weight:600;margin-bottom:10px;line-height:1.2}
+  .rcard p{font-size:14.5px;color:var(--muted);margin-bottom:20px;line-height:1.55}
+  .rcard .foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto}
+  .rcard .size{font-size:12.5px;color:var(--muted)}
+  .dl-btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--navy);
+    background:var(--teal);padding:10px 17px;border-radius:9px;transition:background .2s,transform .15s}
+  .dl-btn:hover{background:var(--teal-bright);transform:translateY(-1px)}
+  .dl-btn svg{width:15px;height:15px}
+
+  /* ── How to use / structure strip ── */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;background:var(--line-dark);border-radius:16px;overflow:hidden;border:1px solid var(--line-dark)}
+  .step{background:#fff;padding:28px 24px}
+  .step .n{font-family:'Space Grotesk';font-size:13px;font-weight:700;color:var(--teal);margin-bottom:12px}
+  .step h4{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:8px}
+  .step p{font-size:14px;color:var(--muted-dark);line-height:1.55}
+
+  /* ── Download all ── */
+  .allbox{background:linear-gradient(120deg,var(--navy-3),var(--navy-2));border:1px solid var(--line);
+    border-radius:20px;padding:44px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+  .allbox h3{font-size:24px;font-weight:700;margin-bottom:8px}
+  .allbox p{color:var(--muted);font-size:15px;max-width:440px}
+
+  /* ── Footer ── */
+  footer{background:var(--navy);border-top:1px solid var(--line);padding:48px 0 40px}
+  .foot-grid{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-bottom:32px}
+  .foot-brand{max-width:320px}
+  .foot-brand .brand{margin-bottom:14px}
+  .foot-brand p{font-size:14px;color:var(--muted);line-height:1.6}
+  .foot-col h5{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;font-weight:600}
+  .foot-col a{display:block;font-size:14.5px;color:#C4D2E4;margin-bottom:10px;transition:color .2s}
+  .foot-col a:hover{color:var(--teal-bright)}
+  .foot-bottom{border-top:1px solid var(--line);padding-top:24px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.3,1),transform .6s cubic-bezier(.2,.7,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.pulse{animation:none}}
+</style>
+</head>
+<body>
+<div class="rail"><div class="rail-fill" id="railFill"></div></div>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand"><span class="dot">C</span>Campus&nbsp;to&nbsp;Corporate</a>
+    <div class="nav-links">
+      <a href="#journey">The 2 Days</a>
+      <a href="#decks">Session Decks</a>
+      <a href="#resources">Trainer Kit</a>
+      <a href="#start">How to Use</a>
+    </div>
+    <a href="#all" class="nav-cta">Get Everything</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="pulse"></span>2-Day Workshop · Complete Package</div>
+    <h1 class="reveal">
+      From the <span class="campus">campus</span><br>
+      <span class="move"><span class="arrow">→</span></span> to the <span class="corp">corporate floor</span>.
+    </h1>
+    <p class="lede reveal">Everything you need to run <strong>Campus to Corporate Ready</strong> — ten animated session decks, a full facilitator guide, participant handouts, and a modern-workplace supplement. Built for final-year students stepping into their first job.</p>
+    <div class="hero-actions reveal">
+      <a href="#journey" class="btn btn-primary">Walk the 2 days
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#all" class="btn btn-ghost">Download all materials</a>
+    </div>
+    <div class="hero-stats reveal">
+      <div class="stat"><div class="num">10</div><div class="lbl">Session decks</div></div>
+      <div class="stat"><div class="num">2</div><div class="lbl">Full days, 9–6</div></div>
+      <div class="stat"><div class="num">4</div><div class="lbl">Trainer documents</div></div>
+      <div class="stat"><div class="num"><span>100+</span></div><div class="lbl">Slides, all animated</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ── THE JOURNEY / TIMELINE ── -->
+<section class="band light" id="journey">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">The 2 days</div>
+      <h2>Ten sessions, one continuous arc.</h2>
+      <p>Each session builds on the last — from understanding the workplace to walking out interview-ready. Download any deck directly from its stop on the path.</p>
+    </div>
+
+    <!-- DAY 1 -->
+    <div class="day-block reveal">
+      <div class="day-label"><span class="d">Day 1</span><span class="t">Foundations · 9:00 AM – 6:00 PM</span></div>
+      <div class="timeline" id="tl-d1"></div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div class="day-block reveal">
+      <div class="day-label"><span class="d">Day 2</span><span class="t">Readiness · 9:00 AM – 6:00 PM</span></div>
+      <div class="timeline" id="tl-d2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SESSION DECKS quick download note ── -->
+<section class="band" id="decks" style="padding-top:64px;padding-bottom:20px">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Session decks</div>
+      <h2>Modern, animated, ready to present.</h2>
+      <p>Every deck opens with objectives and closes with a quote, with real-world scenarios, data, and activities in between. Fade-in animations are built in — just present. Several now include 2025 modern-workplace content: AI at work, remote collaboration, and scannable QR moments.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRAINER KIT ── -->
+<section class="band" id="resources" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">The trainer kit</div>
+      <h2>Everything around the slides.</h2>
+      <p>The documents that turn a set of decks into a workshop anyone can deliver.</p>
+    </div>
+    <div class="grid" id="resGrid"></div>
+  </div>
+</section>
+
+<!-- ── HOW TO USE ── -->
+<section class="band light" id="start">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">How to use this</div>
+      <h2>From download to delivery in four steps.</h2>
+    </div>
+    <div class="steps reveal">
+      <div class="step"><div class="n">01</div><h4>Read the guide first</h4><p>The Facilitator Guide has minute-by-minute timing, opening scripts, and talking points for all ten sessions. Start there.</p></div>
+      <div class="step"><div class="n">02</div><h4>Print the handouts</h4><p>One Participant Handout Pack per person — ten fill-in worksheets that match each session. Print double-sided.</p></div>
+      <div class="step"><div class="n">03</div><h4>Load the decks</h4><p>Open each session deck in PowerPoint. Animations advance on click. Swap the placeholder QR links for your own before delivery.</p></div>
+      <div class="step"><div class="n">04</div><h4>Run the program</h4><p>Use the Program Toolkit for the pre-workshop diagnostic, the 30-day follow-up, and the before/after impact scorecard.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DOWNLOAD ALL ── -->
+<section class="band" id="all">
+  <div class="wrap">
+    <div class="allbox reveal">
+      <div>
+        <h3>Take the whole package.</h3>
+        <p>All ten session decks, the facilitator guide, handouts, program toolkit, industry playbook, and modern-workplace supplement — in one place. Download files individually above, or grab them all from the repository.</p>
+      </div>
+      <a href="https://github.com" class="btn btn-primary" id="repoBtn" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.68.92.68 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+        Open the repository
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="brand"><span class="dot">C</span>Campus to Corporate</a>
+        <p>A complete, ready-to-deliver 2-day workshop that prepares final-year students for their first job — the shift from campus habits to corporate expectations.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Materials</h5>
+        <a href="#journey">Session decks</a>
+        <a href="#resources">Facilitator guide</a>
+        <a href="#resources">Participant handouts</a>
+        <a href="#resources">Modern supplement</a>
+      </div>
+      <div class="foot-col">
+        <h5>The program</h5>
+        <a href="#journey">Day 1 — Foundations</a>
+        <a href="#journey">Day 2 — Readiness</a>
+        <a href="#start">How to use it</a>
+        <a href="#all">Download everything</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Campus to Corporate Ready · Workshop Package</span>
+      <span>Built for trainers and the students they prepare.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Session data ──
+  const DAY1 = [
+    {n:1, t:"Understanding the Corporate World", time:"9:00–10:30", slides:12, anim:true, mod:true, file:"materials/decks/S1_Corporate_World.pptx"},
+    {n:2, t:"Professional Etiquettes & Behaviour", time:"10:45–12:15", slides:11, anim:true, mod:true, file:"materials/decks/S2_Etiquettes.pptx"},
+    {n:3, t:"Communication Skills", time:"1:15–2:45", slides:10, anim:true, mod:false, file:"materials/decks/S3_Communication.pptx"},
+    {n:4, t:"Teamwork & Workplace Collaboration", time:"3:00–4:30", slides:11, anim:true, mod:true, file:"materials/decks/S4_Teamwork.pptx"},
+    {n:5, t:"Day 1 Recap & Reflection", time:"5:00–6:00", slides:9, anim:true, mod:false, file:"materials/decks/S5_Day1_Recap.pptx"},
+  ];
+  const DAY2 = [
+    {n:6, t:"Personal Branding & Career Readiness", time:"9:00–10:30", slides:11, anim:true, mod:true, file:"materials/decks/S6_Personal_Branding.pptx"},
+    {n:7, t:"Interview Skills & All Rounds", time:"10:45–12:30", slides:11, anim:true, mod:true, file:"materials/decks/S7_Interview_Skills.pptx"},
+    {n:8, t:"Workplace Ethics, Attitude & Growth Mindset", time:"1:30–3:00", slides:12, anim:true, mod:true, file:"materials/decks/S8_Ethics_Mindset.pptx"},
+    {n:9, t:"Mock Interview & Peer Feedback", time:"3:15–4:45", slides:8, anim:true, mod:false, file:"materials/decks/S9_Mock_Interview.pptx"},
+    {n:10, t:"Closing, Certificates & Motivation", time:"5:00–6:00", slides:10, anim:true, mod:true, file:"materials/decks/S10_Closing.pptx"},
+  ];
+  const RESOURCES = [
+    {kind:"Trainer Manual", cls:"g", icon:"📕", title:"Facilitator Guide", desc:"28 pages. Minute-by-minute timing, opening scripts, slide talking points, activity facilitation, and 2025 delivery notes for every session.", size:"32 KB · DOCX", file:"materials/guides/Facilitator_Guide.docx"},
+    {kind:"Participant Workbook", cls:"h", icon:"📝", title:"Participant Handout Pack", desc:"Ten printable, fill-in worksheets — one per session. Company map, PREP practice, STAR builder, mindset audit, commitment card, and more.", size:"16 KB · DOCX", file:"materials/handouts/Participant_Handout_Pack.docx"},
+    {kind:"Program Operations", cls:"g", icon:"🧰", title:"Program Toolkit", desc:"The pre-workshop diagnostic, the 30-day follow-up sequence, and the before/after impact scorecard — the pieces that make the learning stick.", size:"20 KB · DOCX", file:"materials/guides/Program_Toolkit.docx"},
+    {kind:"Deep-Dive Reference", cls:"g", icon:"🏭", title:"Industry Readiness Playbook", desc:"The campus-vs-industry gap, real-world simulations, tool fluency, and industry-specific tracks — for going beyond the two days.", size:"24 KB · DOCX", file:"materials/guides/Industry_Readiness_Playbook.docx"},
+    {kind:"Drop-in Slides", cls:"s", icon:"⚡", title:"Modern Workplace 2025 Supplement", desc:"Ten standalone slides on AI at work, remote collaboration, the modern fresher toolkit, and three interactive QR moments. Slot into any session.", size:"224 KB · PPTX", file:"materials/supplements/Modern_Workplace_2025_Supplement.pptx"},
+  ];
+
+  const dlSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>';
+
+  function stopHTML(s){
+    const badges = [];
+    badges.push(`<span>${s.slides} slides</span>`);
+    if(s.anim) badges.push(`<span class="anim">✦ animated</span>`);
+    if(s.mod) badges.push(`<span class="anim">◆ 2025 content</span>`);
+    return `<div class="stop">
+      <div class="stop-card">
+        <div class="stop-num">S${s.n}</div>
+        <div class="stop-body">
+          <h4>${s.t}</h4>
+          <div class="meta">${badges.join("")}<span>${s.time}</span></div>
+        </div>
+        <a class="stop-dl" href="${s.file}" download>${dlSvg}Deck</a>
+      </div>
+    </div>`;
+  }
+  document.getElementById("tl-d1").innerHTML = DAY1.map(stopHTML).join("");
+  document.getElementById("tl-d2").innerHTML = DAY2.map(stopHTML).join("");
+
+  document.getElementById("resGrid").innerHTML = RESOURCES.map(r=>`
+    <div class="rcard">
+      <div class="icon ${r.cls}">${r.icon}</div>
+      <div class="kind">${r.kind}</div>
+      <h3>${r.title}</h3>
+      <p>${r.desc}</p>
+      <div class="foot">
+        <span class="size">${r.size}</span>
+        <a class="dl-btn" href="${r.file}" download>${dlSvg}Download</a>
+      </div>
+    </div>`).join("");
+
+  // ── Reveal on scroll ──
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+
+  // ── Progress rail ──
+  const rf = document.getElementById("railFill");
+  function onScroll(){
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    rf.style.height = (window.scrollY / h * 100) + "vh";
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+
+  // ── Card glow follow ──
+  document.getElementById("resGrid").addEventListener("mousemove", e=>{
+    const c = e.target.closest(".rcard"); if(!c) return;
+    const r = c.getBoundingClientRect();
+    c.style.setProperty("--mx", (e.clientX-r.left)+"px");
+    c.style.setProperty("--my", (e.clientY-r.top)+"px");
+  });
+</script>
+</body>
+</html>
