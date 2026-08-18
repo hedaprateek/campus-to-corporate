@@ -1,10 +1,18 @@
 # Campus to Corporate Ready — Workshop Hub
 
-A complete, ready-to-deliver **2-day workshop** that prepares final-year students for their first job. This repository hosts every deliverable — ten animated session decks, a facilitator guide, participant handouts, program-operations documents, and a modern-workplace supplement — behind a single landing page.
+A complete, ready-to-deliver **2-day workshop** that prepares final-year students for their first job.
+This repository hosts every deliverable — ten animated session decks, a facilitator guide, participant
+handouts, program-operations documents, and a modern-workplace supplement — behind a single landing page.
 
-**Live site:** https://hedaprateek.github.io/campus-to-corporate/
+| | |
+|---|---|
+| **Live site** | <https://hedaprateek.github.io/campus-to-corporate/> |
+| **Content editor** | <https://hedaprateek.github.io/campus-to-corporate/admin.html> |
+| **Share this link** | the live site — anyone can view or download every material, no account needed |
 
-> GitHub Pages serves this repository from the **root** of `main`. `index.html`, `.nojekyll`, and `materials/` must stay at the top level — if they get nested inside a subfolder, the live URL 404s and every download link breaks.
+The site is static: a single `index.html` that renders itself from [`content.json`](content.json), with
+the decks and documents served straight out of [`materials/`](materials/). Committing to `main`
+publishes it — see [How deployment works](#how-deployment-works).
 
 ---
 
@@ -108,50 +116,29 @@ Two things to know:
 
 ---
 
-## Deploy to GitHub Pages (about 3 minutes)
+## How deployment works
 
-You'll do this from your own computer, signed in to your GitHub account.
+This site is **already deployed** — you don't need to set anything up. GitHub Pages serves this
+repository from the root of `main`, so **any commit to `main` publishes itself** within about a minute.
+There is no build step, no pipeline, and nothing to run.
 
-### 1. Create a new repository
-On GitHub, click **New repository**. Name it something like `campus-to-corporate`. Make it **Public**. Don't add a README (this repo already has one). Create it.
+That means every route to changing the site is equivalent: the [content editor](#editing-the-site--the-content-editor),
+GitHub's web uploader, or a plain `git push`. They all end in a commit to `main`, and the commit is the
+deploy.
 
-### 2. Push these files
-Download this whole folder, open a terminal inside it, and run:
+The Pages settings behind it (**Settings → Pages**, *Deploy from a branch*, `main` / `/ (root)`) are
+already configured. Two things must stay true for the site to keep working:
 
-```bash
-git init
-git add .
-git commit -m "Campus to Corporate workshop hub"
-git branch -M main
-git remote add origin https://github.com/<your-username>/<repo-name>.git
-git push -u origin main
-```
+- **`index.html`, `content.json`, `.nojekyll`, `assets/` and `materials/` stay at the repository root.**
+  Nesting them in a subfolder is what broke the site once already — the published URL 404s and every
+  download link dies with it.
+- **The repository stays public.** Pages serves it, the browser downloads from it, and the Office Web
+  Viewer fetches from it. Making it private breaks all three.
 
-Replace `<your-username>` and `<repo-name>` with your actual values.
+### Updating from a terminal
 
-### 3. Turn on GitHub Pages
-In your repository on GitHub:
-1. Go to **Settings → Pages**
-2. Under **Source**, choose **Deploy from a branch**
-3. Set branch to **main** and folder to **/ (root)**
-4. Click **Save**
-
-Wait about a minute. Your site goes live at:
-
-```
-https://<your-username>.github.io/<repo-name>/
-```
-
-That's the link you share. Anyone can open it and download the materials.
-
----
-
-## Updating the materials later
-
-The easy way is the [content editor](#editing-the-site--the-content-editor) — no git needed.
-
-To do it from a terminal instead, replace any file in `materials/` with a newer version (keeping the
-same filename), then:
+If you'd rather not use the editor, replace any file in `materials/` with a newer version — keeping the
+same filename — and push:
 
 ```bash
 git add .
@@ -159,8 +146,8 @@ git commit -m "Update materials"
 git push
 ```
 
-The site updates automatically within a minute. If you change filenames, update the matching `file`
-paths in `content.json` too.
+If you change a filename, update the matching `file` path in `content.json` too, or that card will
+point at a file that no longer exists.
 
 ---
 
